@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajda — Masjidlar va Namoz Vaqtlari</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="logo">
+                <span class="logo-icon">☪</span>
+                <span>Sajda</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#">Bosh sahifa</a>
+                <a href="#mosques">Masjidlar</a>
+                <a href="#prayer">Namoz vaqtlari</a>
+                <a href="#qibla">Qibla</a>
+                <a href="#quran">Qur'on</a>
+                <a href="#duas">Duolar</a>
+                <a href="#zikr">Zikr</a>
+                <a href="#profile">Profil</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="language">UZ ▾</button>
+                <button class="login-btn">Kirish</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-pattern"></div>
+            <div class="floating-star star-1">✦</div>
+            <div class="floating-star star-2">✧</div>
+            <div class="floating-star star-3">✦</div>
+
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <div class="location-badge" id="location-status" tabindex="0" role="button">
+                        <span>●</span>
+                        O'zbekiston bo'ylab
+                    </div>
+
+                    <h1>
+                        Ibodatga
+                        <span>yaqinroq.</span>
+                    </h1>
+
+                    <p>
+                        Yaqin atrofdagi masjidlarni toping,
+                        namoz vaqtlarini kuzating va qiblani aniqlang.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#mosques" class="primary-btn">🕌 Masjid topish</a>
+                        <a href="#prayer" class="secondary-btn">Namoz vaqtlari</a>
+                    </div>
+                </div>
+
+                <div class="hero-card">
+                    <div class="moon">☾</div>
+                    <div class="hero-card-content">
+                        <span class="small-label">BUGUN</span>
+                        <div class="hero-live-row">
+                            <h3>Ibodat vaqti</h3>
+                            <div class="live-chip"><span class="live-dot"></span> LIVE</div>
+                        </div>
+
+                        <div class="next-prayer">
+                            <div>
+                                <span>Keyingi namoz</span>
+                                <strong id="next-prayer-name">Asr</strong>
+                            </div>
+                            <div class="prayer-time" id="next-prayer-time">16:42</div>
+                        </div>
+
+                        <div class="countdown">
+                            <span>Keyingi namozgacha</span>
+                            <strong id="countdown-timer">01 : 27 : 34</strong>
+                        </div>
+
+                        <div class="mini-clock">
+                            <span id="local-date">04 Okt 2026</span>
+                            <strong id="local-time">00:00:00</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ramadan-section" id="ramadan">
+            <div class="container">
+                <div class="ramadan-card">
+                    <div class="ramadan-pattern"></div>
+                    <div class="ramadan-moon">☾</div>
+                    <div class="ramadan-content">
+                        <span class="ramadan-label">🌙 MAXSUS</span>
+                        <h2 id="ramadan-countdown-text">Ramazon oyiga</h2>
+                        <p>Muborak oyga tayyorgarlikni bugundan boshlang.</p>
+                    </div>
+                    <div class="ramadan-decoration">✦</div>
+                </div>
+
+                <div class="ramadan-insights">
+                    <div class="ramadan-stat">
+                        <span>Ramazon kuni</span>
+                        <strong id="ramadan-day">-</strong>
+                    </div>
+                    <div class="ramadan-stat">
+                        <span>Suhoor</span>
+                        <strong id="ramadan-suhoor">-</strong>
+                    </div>
+                    <div class="ramadan-stat">
+                        <span>Iftar</span>
+                        <strong id="ramadan-iftar">-</strong>
+                    </div>
+                    <div class="ramadan-stat">
+                        <span>Qur'on</span>
+                        <strong id="ramadan-quran-goal">1 juz</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mosques-section" id="mosques">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">YAQIN ATROF</span>
+                        <h2>Yaqin masjidlar</h2>
+                    </div>
+                    <a href="#" class="view-all">Barchasini ko‘rish →</a>
+                </div>
+                <div class="mosque-grid" id="mosque-grid"></div>
+            </div>
+        </section>
+
+        <section class="prayer-section" id="prayer">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">BUGUN</span>
+                        <h2>Namoz vaqtlari</h2>
+                    </div>
+                    <label class="city-select" for="city-select">
+                        <span aria-hidden="true">📍</span>
+                        <select id="city-select" aria-label="Shahar tanlash">
+                            <option value="Toshkent">Toshkent</option>
+                            <option value="Samarqand">Samarqand</option>
+                            <option value="Buxoro">Buxoro</option>
+                            <option value="Andijon">Andijon</option>
+                            <option value="Nukus">Nukus</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="prayer-grid">
+                    <div class="prayer-card" data-prayer-card="Fajr">
+                        <span>Bomdod</span>
+                        <strong id="time-fajr">05:12</strong>
+                    </div>
+                    <div class="prayer-card" data-prayer-card="Sunrise">
+                        <span>Quyosh chiqishi</span>
+                        <strong id="time-sunrise">06:47</strong>
+                    </div>
+                    <div class="prayer-card" data-prayer-card="Dhuhr">
+                        <span>Peshin</span>
+                        <strong id="time-dhuhr">12:27</strong>
+                    </div>
+                    <div class="prayer-card" data-prayer-card="Asr">
+                        <span>Asr</span>
+                        <strong id="time-asr">16:42</strong>
+                        <small id="prayer-status-label">Keyingi</small>
+                    </div>
+                    <div class="prayer-card" data-prayer-card="Maghrib">
+                        <span>Shom</span>
+                        <strong id="time-maghrib">18:31</strong>
+                    </div>
+                    <div class="prayer-card" data-prayer-card="Isha">
+                        <span>Xufton</span>
+                        <strong id="time-isha">19:52</strong>
+                    </div>
+                </div>
+
+                <div class="prayer-summary">
+                    <div class="status-pill info" id="prayer-api-status">Vaqtlar hisoblanmoqda...</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="qibla-section" id="qibla">
+            <div class="container">
+                <div class="qibla-card">
+                    <div class="qibla-info">
+                        <span class="section-label">QIBLA</span>
+                        <h2>Qiblani aniq <span>toping.</span></h2>
+                        <p>Telefoningiz yordamida Ka'baga yo‘nalishni aniqlang.</p>
+                        <button class="qibla-btn" id="qibla-btn" type="button" aria-label="Qiblani aniqlash">🧭 Qiblani aniqlash</button>
+                        <button class="qibla-retry-btn" id="qibla-retry-btn" type="button" hidden aria-label="Qibla qayta urinish">Qayta urinib ko‘rish</button>
+                        <div class="qibla-readout">
+                            <span>Qibla direction</span>
+                            <strong id="qibla-degree">--°</strong>
+                        </div>
+                        <div class="qibla-status" id="qibla-status">Qibla yo'nalishini aniqlash uchun telefonning orientatsiyasi yoki joylashuv ma'lumotlari kerak.</div>
+                    </div>
+
+                    <div class="compass-wrap">
+                        <div class="compass">
+                            <div class="compass-ring">
+                                <span class="north">N</span>
+                                <span class="east">E</span>
+                                <span class="south">S</span>
+                                <span class="west">W</span>
+                                <div class="compass-arrow" id="compass-arrow">↑</div>
+                                <div class="compass-center">🕋</div>
+                            </div>
+                        </div>
+
+                        <div class="qibla-debug" id="qibla-debug" hidden>
+                            <div><span>Heading</span><strong id="debug-heading">--</strong></div>
+                            <div><span>Qibla Bearing</span><strong id="debug-bearing">--</strong></div>
+                            <div><span>Difference</span><strong id="debug-difference">--</strong></div>
+                            <div><span>Sensor</span><strong id="debug-sensor">Unavailable</strong></div>
+                            <div><span>Location</span><strong id="debug-location">Unavailable</strong></div>
+                            <div><span>Permission</span><strong id="debug-permission">Unknown</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quran-section" id="quran">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">QURON</span>
+                        <h2>Qur'on audio</h2>
+                    </div>
+                    <div class="search-wrap">
+                        <input id="quran-search" type="search" placeholder="Surani qidiring..." aria-label="Surani qidiring" />
+                    </div>
+                </div>
+
+                <div class="audio-player-panel" id="audio-player-panel" aria-live="polite">
+                    <div class="audio-player-header">
+                        <div>
+                            <span class="section-label">AUDIO PLAYER</span>
+                            <strong id="audio-title">Sura yoki duoni tanlang</strong>
+                        </div>
+                        <button class="audio-close" id="audio-close" type="button" aria-label="Audio playerni yopish">×</button>
+                    </div>
+
+                    <div class="audio-player-controls">
+                        <button class="audio-button primary" id="audio-play-toggle" type="button" aria-label="Play or pause audio">▶</button>
+                        <button class="audio-button secondary" id="audio-stop" type="button" aria-label="Stop audio">■</button>
+
+                        <div class="audio-progress-wrap">
+                            <span id="audio-current-time">00:00</span>
+                            <input id="audio-progress" type="range" min="0" max="100" value="0" aria-label="Audio progress" />
+                            <span id="audio-duration">00:00</span>
+                        </div>
+
+                        <div class="audio-volume-wrap">
+                            <button class="audio-button muted" id="audio-mute" type="button" aria-label="Mute audio">🔊</button>
+                            <input id="audio-volume" type="range" min="0" max="100" value="80" aria-label="Audio volume" />
+                        </div>
+                    </div>
+
+                    <div class="audio-status" id="audio-status">Audio yuklanishi mumkin bo‘lganda shu yerda ko‘rsatiladi.</div>
+                    <audio id="global-audio" preload="none"></audio>
+                </div>
+
+                <div class="quran-grid" id="quran-grid"></div>
+            </div>
+        </section>
+
+        <section class="duas-section" id="duas">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">DUOLAR</span>
+                        <h2>Kunlik duolar</h2>
+                    </div>
+                </div>
+                <div class="dua-filters" id="dua-filters"></div>
+                <div class="dua-grid" id="dua-grid"></div>
+            </div>
+        </section>
+
+        <section class="zikr-section" id="zikr">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">ZIKR</span>
+                        <h2>Digital tasbih</h2>
+                    </div>
+                </div>
+
+                <div class="zikr-card">
+                    <div class="zikr-display">
+                        <div class="zikr-count" id="zikr-count">0</div>
+                        <div class="zikr-target" id="zikr-target-text">Maqsad: 33</div>
+                    </div>
+
+                    <div class="zikr-controls">
+                        <button class="zikr-btn primary" id="zikr-plus" type="button">+1</button>
+                        <button class="zikr-btn ghost" id="zikr-minus" type="button">-1</button>
+                        <button class="zikr-btn muted" id="zikr-reset" type="button">Reset</button>
+                    </div>
+
+                    <div class="target-selector">
+                        <button class="target-btn active" data-target="33" type="button">33</button>
+                        <button class="target-btn" data-target="99" type="button">99</button>
+                        <label class="custom-target-wrap">
+                            <span>Maxsus</span>
+                            <input id="custom-target" type="number" min="1" max="999" value="33" />
+                        </label>
+                    </div>
+
+                    <div class="progress-track">
+                        <span id="zikr-progress"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="daily-section" id="daily">
+            <div class="container">
+                <div class="daily-card">
+                    <span class="section-label">SAJDA DAILY</span>
+                    <h2>Bugun uchun ruhiy yo'nalish</h2>
+                    <div class="daily-grid">
+                        <article class="daily-item">
+                            <span>Kunlik oyat</span>
+                            <p id="daily-verse">"..."</p>
+                            <small id="daily-verse-ref">-</small>
+                        </article>
+                        <article class="daily-item">
+                            <span>Kunlik dua</span>
+                            <p id="daily-dua">"..."</p>
+                            <small id="daily-dua-ref">-</small>
+                        </article>
+                        <article class="daily-item">
+                            <span>Yodda tutish</span>
+                            <p id="daily-reminder">"..."</p>
+                            <small id="daily-reminder-ref">Yodda tuting</small>
+                        </article>
+                        <article class="daily-item">
+                            <span>Yaxshi amal</span>
+                            <p id="daily-deed">"..."</p>
+                            <small id="daily-deed-ref">Bugun</small>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section" id="profile">
+            <div class="container">
+                <div class="profile-card">
+                    <div class="profile-copy">
+                        <span class="section-label">PROFILE</span>
+                        <h2>Foydalanuvchi profili</h2>
+                        <p>Sizning ibodat ko'rsatkichlaringiz va xohishlaringiz bu yerda saqlanadi.</p>
+                        <button class="qibla-btn profile-action" type="button">Profilni yangilash</button>
+                    </div>
+                    <div class="profile-metrics">
+                        <div class="profile-stat">
+                            <span>Ism</span>
+                            <strong id="profile-name">Siz</strong>
+                        </div>
+                        <div class="profile-stat">
+                            <span>Shahar</span>
+                            <strong id="profile-city">Toshkent</strong>
+                        </div>
+                        <div class="profile-stat">
+                            <span>Sevimli duolar</span>
+                            <strong id="profile-favorites">0</strong>
+                        </div>
+                        <div class="profile-stat">
+                            <span>Streak</span>
+                            <strong id="profile-streak">7 kun</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="status-strip">
+            <div class="container status-strip-inner">
+                <div class="status-pill" id="ramadan-status-pill">Ramazon sanasi tayyorlanmoqda...</div>
+                <div class="status-pill subtle" id="location-precision-pill">Joylashuv ma'lumotlari kutilyapti</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-icon">☪</span>
+                    <span>Sajda</span>
+                </div>
+                <p>Ibodatga yaqinroq bo‘lish uchun zamonaviy platforma.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#mosques">Masjidlar</a>
+                <a href="#prayer">Namoz vaqtlari</a>
+                <a href="#qibla">Qibla</a>
+                <a href="#duas">Duolar</a>
+            </div>
+        </div>
+        <div class="copyright">© 2026 Sajda. Barcha huquqlar himoyalangan.</div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
