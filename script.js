@@ -53,6 +53,46 @@ const cityMosqueDatabase = {
     { name: 'Nurobod masjidi', district: 'Shahrixon', distance: 1.6, address: 'Andijon, Shahrixon', lat: 40.7937, lon: 72.3359 },
     { name: 'Qadiriya', district: 'Andijon', distance: 2.2, address: 'Andijon, Qadiriya', lat: 40.7810, lon: 72.3520 }
   ],
+  Namangan: [
+    { name: 'Jami masjidi', district: 'Namangan markaz', distance: 0.9, address: 'Namangan, Markaz', lat: 40.9990, lon: 71.6690 },
+    { name: 'Maqbarai Aisha', district: 'Namangan', distance: 1.8, address: 'Namangan, Aisha', lat: 41.0046, lon: 71.6534 },
+    { name: 'Yakkatut masjidi', district: 'Namangan', distance: 2.5, address: 'Namangan, Yakkatut', lat: 41.0075, lon: 71.7022 }
+  ],
+  'Fargʻona': [
+    { name: 'Fargʻona Jami', district: 'Fargʻona', distance: 0.8, address: 'Fargʻona, Markaz', lat: 40.3864, lon: 71.7866 },
+    { name: 'Markaziy masjid', district: 'Fargʻona', distance: 1.6, address: 'Fargʻona, Ko\'kcha', lat: 40.3779, lon: 71.7855 },
+    { name: 'Abdulla Qodiriy masjidi', district: 'Fargʻona', distance: 2.4, address: 'Fargʻona, Shaxti', lat: 40.3928, lon: 71.8032 }
+  ],
+  Qarshi: [
+    { name: 'Qarshi Jami', district: 'Qarshi', distance: 1.0, address: 'Qarshi, Markaz', lat: 38.8608, lon: 65.7997 },
+    { name: 'Jomiy masjidi', district: 'Qarshi', distance: 1.9, address: 'Qarshi, Gumbaz', lat: 38.8731, lon: 65.7788 },
+    { name: 'Muborak masjid', district: 'Qarshi', distance: 2.7, address: 'Qarshi, Shahriyor', lat: 38.8482, lon: 65.8015 }
+  ],
+  Navoiy: [
+    { name: 'Navoiy Jami', district: 'Navoiy', distance: 1.1, address: 'Navoiy, Markaz', lat: 40.0844, lon: 65.3792 },
+    { name: 'Beshkent masjidi', district: 'Navoiy', distance: 2.1, address: 'Navoiy, Beshkent', lat: 40.0912, lon: 65.3620 },
+    { name: 'Khodja masjidi', district: 'Navoiy', distance: 2.9, address: 'Navoiy, Khodja', lat: 40.0740, lon: 65.3579 }
+  ],
+  Jizzax: [
+    { name: 'Jizzax Jami', district: 'Jizzax', distance: 0.9, address: 'Jizzax, Markaz', lat: 40.1158, lon: 67.8422 },
+    { name: 'Ravshan masjidi', district: 'Jizzax', distance: 1.7, address: 'Jizzax, Gagarin', lat: 40.1242, lon: 67.8684 },
+    { name: 'Muborak masjid', district: 'Jizzax', distance: 2.4, address: 'Jizzax, Ko\'kcha', lat: 40.1080, lon: 67.8300 }
+  ],
+  Termiz: [
+    { name: 'Termiz Jami', district: 'Termiz', distance: 1.2, address: 'Termiz, Markaz', lat: 37.2160, lon: 67.2788 },
+    { name: 'Oq masjid', district: 'Termiz', distance: 1.9, address: 'Termiz, Oq masjid', lat: 37.2223, lon: 67.3005 },
+    { name: 'Shahrisabz masjidi', district: 'Termiz', distance: 2.8, address: 'Termiz, Shahrisabz', lat: 37.1989, lon: 67.2677 }
+  ],
+  Guliston: [
+    { name: 'Guliston Jami', district: 'Guliston', distance: 1.0, address: 'Guliston, Markaz', lat: 40.4897, lon: 68.7847 },
+    { name: 'Sirdaryo masjidi', district: 'Guliston', distance: 1.8, address: 'Guliston, Sirdaryo', lat: 40.4971, lon: 68.7721 },
+    { name: 'Shayxlar masjidi', district: 'Guliston', distance: 2.5, address: 'Guliston, Shayxlar', lat: 40.5028, lon: 68.8011 }
+  ],
+  Urganch: [
+    { name: 'Urganch Jami', district: 'Urganch', distance: 1.0, address: 'Urganch, Markaz', lat: 41.5514, lon: 60.6317 },
+    { name: 'Gulshan masjidi', district: 'Urganch', distance: 1.7, address: 'Urganch, Gulshan', lat: 41.5628, lon: 60.6189 },
+    { name: 'Xorazm masjidi', district: 'Urganch', distance: 2.6, address: 'Urganch, Xorazm', lat: 41.5460, lon: 60.6424 }
+  ],
   Nukus: [
     { name: 'Jami masjidi', district: 'Nukus markaz', distance: 1.1, address: 'Nukus, Markaz', lat: 42.4531, lon: 59.6103 },
     { name: 'Qoraqalpoq masjidi', district: 'Qoraqalpoq', distance: 2.0, address: 'Nukus, Qoraqalpoq', lat: 42.4618, lon: 59.6158 },
@@ -98,6 +138,7 @@ const dailyDeeds = ['Bir kimsaga do\' st qilish.', 'Qur\'onning bir oyatiga naza
 
 const appState = {
   selectedCity: localStorage.getItem('sajda-city') || SAJDA_CONFIG.defaultCity,
+  manualCitySelected: localStorage.getItem('sajda-city-source') === 'manual',
   duaFilter: 'Barchasi',
   quranSearch: '',
   locationState: {
@@ -758,13 +799,35 @@ function setLocationStatus(cityName, isManual = false) {
   }
 }
 
+function getMosqueFallbackForCity(cityName) {
+  const safeCityName = cityName && SAJDA_CONFIG.cityProfiles[cityName] ? cityName : SAJDA_CONFIG.defaultCity;
+  const scored = cityMosqueDatabase[safeCityName] || cityMosqueDatabase[SAJDA_CONFIG.defaultCity];
+  return (scored || []).map((mosque, index) => ({
+    ...mosque,
+    id: `${safeCityName}-${index}`,
+    openingHours: mosque.openingHours || '5 mahal',
+    image: 'https://images.unsplash.com/photo-1518569650153-7c4d74a1d77d?auto=format&fit=crop&w=900&q=80'
+  }));
+}
+
 function applyCitySelection(cityName, options = {}) {
   const safeCityName = cityName && SAJDA_CONFIG.cityProfiles[cityName] ? cityName : SAJDA_CONFIG.defaultCity;
+  const isManualSelection = Boolean(options.isManual);
+
   appState.selectedCity = safeCityName;
+  appState.manualCitySelected = isManualSelection;
+
   if (options.persist !== false) {
     localStorage.setItem('sajda-city', safeCityName);
   }
-  setLocationStatus(safeCityName, Boolean(options.isManual));
+
+  if (isManualSelection) {
+    localStorage.setItem('sajda-city-source', 'manual');
+  } else {
+    localStorage.removeItem('sajda-city-source');
+  }
+
+  setLocationStatus(safeCityName, isManualSelection);
 
   const citySelectEl = document.getElementById('city-select');
   if (citySelectEl) citySelectEl.value = safeCityName;
@@ -778,10 +841,11 @@ async function updateMosqueGrid(cityName = appState.selectedCity, coordinates = 
   const grid = document.getElementById('mosque-grid');
   if (!grid) return;
 
-  let items = cityMosqueDatabase[cityName] || cityMosqueDatabase.Toshkent;
+  const safeCityName = cityName && SAJDA_CONFIG.cityProfiles[cityName] ? cityName : SAJDA_CONFIG.defaultCity;
+  let items = getMosqueFallbackForCity(safeCityName);
 
   if (coordinates && Number.isFinite(coordinates.latitude) && Number.isFinite(coordinates.longitude)) {
-    const nearby = await mosqueService.getNearbyMosques(coordinates.latitude, coordinates.longitude, cityName);
+    const nearby = await mosqueService.getNearbyMosques(coordinates.latitude, coordinates.longitude, safeCityName);
     items = nearby && nearby.length ? nearby : items;
   }
 
@@ -810,10 +874,17 @@ async function updateMosqueGrid(cityName = appState.selectedCity, coordinates = 
   }).join('');
 }
 
-async function requestLocationPermission() {
+async function requestLocationPermission(forceOverride = false) {
   const precisionEl = document.getElementById('location-precision-pill');
   if (!navigator.geolocation) {
     if (precisionEl) precisionEl.textContent = 'Brauzer geolokatsiyani qo\'llab-quvvatlamaydi.';
+    return;
+  }
+
+  if (!forceOverride && appState.manualCitySelected) {
+    if (precisionEl) {
+      precisionEl.textContent = `Shahar qo\'lda tanlangan: ${appState.selectedCity}. Joylashuvni yangilash uchun qayta bosing.`;
+    }
     return;
   }
 
@@ -841,7 +912,9 @@ async function requestLocationPermission() {
 
     const selectedCity = cityService.getByName(locationCity)?.name || nearestCity.name;
     appState.selectedCity = selectedCity;
+    appState.manualCitySelected = false;
     localStorage.setItem('sajda-city', selectedCity);
+    localStorage.removeItem('sajda-city-source');
     setLocationStatus(selectedCity, false);
 
     if (precisionEl) {
@@ -865,7 +938,7 @@ async function requestLocationPermission() {
         ? 'Joylashuv aniqlanmadi. Bir oz kutib, qayta urinib ko\'ring.'
         : 'Joylashuvni aniqlashda muammo yuz berdi.';
 
-    setLocationStatus(appState.selectedCity, true);
+    setLocationStatus(appState.selectedCity, appState.manualCitySelected);
     if (precisionEl) precisionEl.textContent = message;
   }
 }
@@ -1468,7 +1541,7 @@ function bindOnboarding() {
   });
 
   locationBtn.addEventListener('click', async () => {
-    await requestLocationPermission();
+    await requestLocationPermission(true);
     localStorage.setItem('sajda-onboarding-complete', 'true');
     modal.classList.add('hidden');
   });
@@ -1493,11 +1566,11 @@ function initializeApp() {
 
   const locationStatusEl = document.getElementById('location-status');
   if (locationStatusEl) {
-    locationStatusEl.addEventListener('click', requestLocationPermission);
+    locationStatusEl.addEventListener('click', () => requestLocationPermission(true));
     locationStatusEl.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        requestLocationPermission();
+        requestLocationPermission(true);
       }
     });
   }
