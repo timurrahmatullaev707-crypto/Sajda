@@ -33,6 +33,42 @@
         </div>
     </header>
 
+    <div class="onboarding-modal" id="onboarding-modal" aria-modal="true" role="dialog">
+        <div class="onboarding-card">
+            <div class="onboarding-header">
+                <span class="section-label">SAJDA</span>
+                <h2>Assalomu alaykum</h2>
+            </div>
+            <p>Qaysi shaharda yashaysiz? Shaharni tanlang yoki joylashuvingizni aniqlash uchun ruxsat bering.</p>
+
+            <label class="onboarding-field">
+                <span>Ismingiz</span>
+                <input id="user-name-input" type="text" placeholder="Masalan: Abdulloh" maxlength="40">
+            </label>
+
+            <label class="onboarding-field">
+                <span>Shahar</span>
+                <input id="onboarding-city-search" type="search" placeholder="Shaharni qidiring..." aria-label="Shahar qidirish">
+            </label>
+
+            <div id="onboarding-city-results" class="onboarding-city-results"></div>
+
+            <label class="onboarding-field">
+                <span>Til</span>
+                <select id="user-language-select">
+                    <option value="uz">O‘zbekcha</option>
+                    <option value="en">English</option>
+                    <option value="ar">العربية</option>
+                </select>
+            </label>
+
+            <div class="onboarding-actions">
+                <button class="secondary-btn onboarding-location-btn" id="onboarding-location-btn" type="button">📍 Joylashuvni aniqlash</button>
+                <button class="primary-btn onboarding-continue-btn" id="onboarding-continue-btn" type="button">Davom etish</button>
+            </div>
+        </div>
+    </div>
+
     <main>
         <section class="hero">
             <div class="hero-pattern"></div>
@@ -148,16 +184,17 @@
                         <span class="section-label">BUGUN</span>
                         <h2>Namoz vaqtlari</h2>
                     </div>
-                    <label class="city-select" for="city-select">
-                        <span aria-hidden="true">📍</span>
-                        <select id="city-select" aria-label="Shahar tanlash">
-                            <option value="Toshkent">Toshkent</option>
-                            <option value="Samarqand">Samarqand</option>
-                            <option value="Buxoro">Buxoro</option>
-                            <option value="Andijon">Andijon</option>
-                            <option value="Nukus">Nukus</option>
-                        </select>
-                    </label>
+                    <div class="city-controls">
+                        <div class="city-search-wrap">
+                            <span aria-hidden="true">🔍</span>
+                            <input id="city-search" type="search" placeholder="Shahar qidirish" aria-label="Shahar qidirish">
+                            <div id="city-search-results" class="city-search-results" hidden></div>
+                        </div>
+                        <label class="city-select" for="city-select">
+                            <span aria-hidden="true">📍</span>
+                            <select id="city-select" aria-label="Shahar tanlash"></select>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="prayer-grid">

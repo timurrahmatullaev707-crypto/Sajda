@@ -1,15 +1,25 @@
-﻿const SAJDA_CONFIG = {
+﻿const UZBEK_CITIES = [
+  { name: 'Toshkent', region: 'Toshkent', country: 'O‘zbekiston', lat: 41.2995, lon: 69.2401 },
+  { name: 'Samarqand', region: 'Samarqand', country: 'O‘zbekiston', lat: 39.6542, lon: 66.9597 },
+  { name: 'Buxoro', region: 'Buxoro', country: 'O‘zbekiston', lat: 39.7747, lon: 64.4286 },
+  { name: 'Andijon', region: 'Andijon', country: 'O‘zbekiston', lat: 40.7821, lon: 72.3446 },
+  { name: 'Namangan', region: 'Namangan', country: 'O‘zbekiston', lat: 40.999, lon: 71.669 },
+  { name: 'Fargʻona', region: 'Fargʻona', country: 'O‘zbekiston', lat: 40.3864, lon: 71.7866 },
+  { name: 'Qarshi', region: 'Qashqadaryo', country: 'O‘zbekiston', lat: 38.8608, lon: 65.7997 },
+  { name: 'Navoiy', region: 'Navoiy', country: 'O‘zbekiston', lat: 40.0844, lon: 65.3792 },
+  { name: 'Jizzax', region: 'Jizzax', country: 'O‘zbekiston', lat: 40.1158, lon: 67.8422 },
+  { name: 'Termiz', region: 'Surxondaryo', country: 'O‘zbekiston', lat: 37.216, lon: 67.2788 },
+  { name: 'Guliston', region: 'Sirdaryo', country: 'O‘zbekiston', lat: 40.4897, lon: 68.7847 },
+  { name: 'Urganch', region: 'Xorazm', country: 'O‘zbekiston', lat: 41.5514, lon: 60.6317 },
+  { name: 'Nukus', region: 'Qoraqalpogʻiston', country: 'O‘zbekiston', lat: 42.4531, lon: 59.6103 }
+];
+
+const SAJDA_CONFIG = {
   timezone: 'Asia/Tashkent',
   defaultCity: 'Toshkent',
   ramadanStart: new Date('2026-02-18T00:00:00+05:00'),
   ramadanEnd: new Date('2026-03-19T23:59:59+05:00'),
-  cityProfiles: {
-    Toshkent: { lat: 41.2995, lon: 69.2401 },
-    Samarqand: { lat: 39.6542, lon: 66.9597 },
-    Buxoro: { lat: 39.7747, lon: 64.4286 },
-    Andijon: { lat: 40.7821, lon: 72.3446 },
-    Nukus: { lat: 42.4531, lon: 59.6103 }
-  }
+  cityProfiles: Object.fromEntries(UZBEK_CITIES.map((city) => [city.name, { lat: city.lat, lon: city.lon, region: city.region, country: city.country }]))
 };
 
 const prayerOrder = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
@@ -89,7 +99,158 @@ const dailyDeeds = ['Bir kimsaga do\' st qilish.', 'Qur\'onning bir oyatiga naza
 const appState = {
   selectedCity: localStorage.getItem('sajda-city') || SAJDA_CONFIG.defaultCity,
   duaFilter: 'Barchasi',
-  quranSearch: ''
+  quranSearch: '',
+  locationState: {
+    latitude: null,
+    longitude: null,
+    accuracy: null,
+    city: null,
+    region: null,
+    country: null,
+    source: 'manual'
+  }
+};
+
+const cityService = {
+  list: UZBEK_CITIES,
+  getAll() {
+    return [...this.list];
+  },
+  getByName(name) {
+    return this.list.find((city) => city.name.toLowerCase() === String(name || '').trim().toLowerCase()) || null;
+  },
+  search(query) {
+    const cleaned = String(query || '').trim().toLowerCase();
+    if (!cleaned) return this.list;
+    return this.list.filter((city) => (
+      city.name.toLowerCase().includes(cleaned)
+      || city.region.toLowerCase().includes(cleaned)
+      || city.country.toLowerCase().includes(cleaned)
+    )).slice(0, 8);
+  },
+  getNearest(latitude, longitude) {
+    if (Number.isNaN(Number(latitude)) || Number.isNaN(Number(longitude))) {
+      return this.getByName(appState.selectedCity) || this.list[0];
+    }
+
+    let nearest = this.list[0];
+    let shortestDistance = Number.POSITIVE_INFINITY;
+
+    this.list.forEach((city) => {
+      const distance = Math.hypot(latitude - city.lat, longitude - city.lon);
+      if (distance < shortestDistance) {
+        shortestDistance = distance;
+        nearest = city;
+      }
+    });
+
+    return nearest;
+  }
+};
+
+const locationService = {
+  async requestCurrentLocation() {
+    if (!navigator.geolocation) {
+      throw new Error('Geolocation is unsupported');
+    }
+
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => resolve({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          accuracy: position.coords.accuracy,
+          timestamp: position.timestamp
+        }),
+        (error) => reject(error),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 60000 }
+      );
+    });
+  },
+
+  async reverseGeocode(latitude, longitude) {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`;
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'Accept-Language': 'uz,en'
+        }
+      });
+      if (!response.ok) {
+        return null;
+      }
+
+      const data = await response.json();
+      const address = data && data.address ? data.address : {};
+      const city = address.city || address.town || address.village || address.municipality || 'Joylashuv';
+      const region = address.state || address.region || address.province || 'Hudud';
+      const country = address.country || 'O‘zbekiston';
+
+      return {
+        city,
+        region,
+        country,
+        display: `${city}, ${region}, ${country}`
+      };
+    } catch (error) {
+      return null;
+    }
+  }
+};
+
+const mosqueService = {
+  buildFallback(cityName) {
+    const base = cityMosqueDatabase[cityName] || cityMosqueDatabase.Toshkent;
+    return base.map((mosque) => ({
+      ...mosque,
+      image: 'https://images.unsplash.com/photo-1518569650153-7c4d74a1d77d?auto=format&fit=crop&w=900&q=80'
+    }));
+  },
+  async getNearbyMosques(latitude, longitude, cityName = appState.selectedCity) {
+    const fallback = this.buildFallback(cityName);
+    const overpassQuery = `
+      [out:json][timeout:25];
+      (
+        node["amenity"="place_of_worship"]["religion"="muslim"](around:8000,${latitude},${longitude});
+        way["amenity"="place_of_worship"]["religion"="muslim"](around:8000,${latitude},${longitude});
+      );
+      out center 8;
+    `;
+
+    try {
+      const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(overpassQuery)}`;
+      const response = await fetch(url, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Overpass failed');
+      const payload = await response.json();
+      const elements = Array.isArray(payload.elements) ? payload.elements : [];
+      const results = elements
+        .map((element) => {
+          const lng = element.lon ?? (element.center && element.center.lon);
+          const lat = element.lat ?? (element.center && element.center.lat);
+          if (typeof lat !== 'number' || typeof lng !== 'number') return null;
+          const distance = Math.hypot(latitude - lat, longitude - lng) * 111.32;
+          return {
+            name: element.tags && element.tags.name ? element.tags.name : 'Masjid',
+            address: element.tags && element.tags['addr:street'] ? element.tags['addr:street'] : 'Mahalliy manzil',
+            distance: Number(distance.toFixed(1)),
+            lat,
+            lon: lng,
+            phone: element.tags && element.tags.phone ? element.tags.phone : '',
+            rating: element.tags && element.tags['rating:wisdom'] ? Number(element.tags['rating:wisdom']) : null,
+            image: `https://images.unsplash.com/photo-1518569650153-7c4d74a1d77d?auto=format&fit=crop&w=900&q=80`
+          };
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, 8);
+
+      if (results.length) return results;
+    } catch (error) {
+      // ignore and fall back to city data
+    }
+
+    return fallback;
+  }
 };
 
 const quranService = {
@@ -590,33 +751,58 @@ function setLocationStatus(cityName, isManual = false) {
   if (locationStatusEl) {
     locationStatusEl.innerHTML = `<span>●</span> ${cityLabel} shahri`;
   }
+
   const precisionEl = document.getElementById('location-precision-pill');
   if (precisionEl) {
     precisionEl.textContent = isManual ? "Shahar qo'lda tanlandi" : 'Joylashuv aniqlandi';
   }
 }
 
-function updateMosqueGrid(cityName = appState.selectedCity) {
+function applyCitySelection(cityName, options = {}) {
+  const safeCityName = cityName && SAJDA_CONFIG.cityProfiles[cityName] ? cityName : SAJDA_CONFIG.defaultCity;
+  appState.selectedCity = safeCityName;
+  if (options.persist !== false) {
+    localStorage.setItem('sajda-city', safeCityName);
+  }
+  setLocationStatus(safeCityName, Boolean(options.isManual));
+
+  const citySelectEl = document.getElementById('city-select');
+  if (citySelectEl) citySelectEl.value = safeCityName;
+
+  updateMosqueGrid(safeCityName, options.coordinates || null);
+  renderPrayerTimes(safeCityName);
+  updateProfile();
+}
+
+async function updateMosqueGrid(cityName = appState.selectedCity, coordinates = null) {
   const grid = document.getElementById('mosque-grid');
   if (!grid) return;
 
-  const items = cityMosqueDatabase[cityName] || cityMosqueDatabase.Toshkent;
+  let items = cityMosqueDatabase[cityName] || cityMosqueDatabase.Toshkent;
+
+  if (coordinates && Number.isFinite(coordinates.latitude) && Number.isFinite(coordinates.longitude)) {
+    const nearby = await mosqueService.getNearbyMosques(coordinates.latitude, coordinates.longitude, cityName);
+    items = nearby && nearby.length ? nearby : items;
+  }
+
   grid.innerHTML = items.map((mosque, index) => {
-    const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mosque.name + ' ' + mosque.address)}`;
+    const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((mosque.name || 'Masjid') + ' ' + (mosque.address || 'Uzbekistan'))}`;
+    const distanceLabel = typeof mosque.distance === 'number' ? `${mosque.distance.toFixed(1)} km` : 'Yaqin';
+    const imgUrl = mosque.image || 'https://images.unsplash.com/photo-1518569650153-7c4d74a1d77d?auto=format&fit=crop&w=900&q=80';
     return `
       <article class="mosque-card">
-        <div class="mosque-image mosque-image-${(index % 3) + 1}">
-          <span class="distance">${mosque.distance} km</span>
+        <div class="mosque-image" style="background-image: linear-gradient(rgba(2,12,10,0.2), rgba(2,12,10,0.3)), url('${imgUrl}');">
+          <span class="distance">${distanceLabel}</span>
         </div>
         <div class="mosque-info">
           <div class="mosque-title">
             <h3>${mosque.name}</h3>
             <span class="verified">✓</span>
           </div>
-          <p>${mosque.address}</p>
+          <p>${mosque.address || 'Masjid manzili ma\'lum emas'}</p>
           <div class="mosque-bottom">
-            <span>🕐 5 mahal</span>
-            <a href="${mapLink}" target="_blank" rel="noreferrer">Map</a>
+            <span>🕐 ${mosque.openingHours || '5 mahal'}</span>
+            <a href="${mapLink}" target="_blank" rel="noreferrer">Yo‘nalish</a>
           </div>
         </div>
       </article>
@@ -624,50 +810,68 @@ function updateMosqueGrid(cityName = appState.selectedCity) {
   }).join('');
 }
 
-function requestLocationPermission() {
+async function requestLocationPermission() {
+  const precisionEl = document.getElementById('location-precision-pill');
   if (!navigator.geolocation) {
-    const statusEl = document.getElementById('location-precision-pill');
-    if (statusEl) statusEl.textContent = 'Brauzer geolokatsiyani qo\'llab-quvvatlamaydi.';
+    if (precisionEl) precisionEl.textContent = 'Brauzer geolokatsiyani qo\'llab-quvvatlamaydi.';
     return;
   }
 
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      const nearestCity = getNearestCity(position.coords.latitude, position.coords.longitude);
-      appState.selectedCity = nearestCity;
-      setLocationStatus(nearestCity, false);
-      localStorage.setItem('sajda-city', nearestCity);
-      updateMosqueGrid(nearestCity);
-      renderPrayerTimes(nearestCity);
-      const citySelectEl = document.getElementById('city-select');
-      if (citySelectEl) citySelectEl.value = nearestCity;
-      const precisionEl = document.getElementById('location-precision-pill');
-      if (precisionEl) precisionEl.textContent = `Joylashuv aniqlandi: ${position.coords.latitude.toFixed(3)}, ${position.coords.longitude.toFixed(3)}`;
-      updateProfile();
-    },
-    () => {
-      setLocationStatus(appState.selectedCity, true);
-      const precisionEl = document.getElementById('location-precision-pill');
-      if (precisionEl) precisionEl.textContent = "Joylashuvga ruxsat berilmagan. Shaharni qo'lda tanlang.";
-    },
-    { timeout: 10000, enableHighAccuracy: true }
-  );
+  if (precisionEl) {
+    precisionEl.textContent = 'Joylashuv aniqlanmoqda...';
+  }
+
+  try {
+    const location = await locationService.requestCurrentLocation();
+    const reverseResult = await locationService.reverseGeocode(location.latitude, location.longitude);
+    const nearestCity = cityService.getNearest(location.latitude, location.longitude);
+    const locationCity = reverseResult && reverseResult.city && reverseResult.city !== 'Joylashuv'
+      ? reverseResult.city
+      : nearestCity.name;
+
+    appState.locationState = {
+      latitude: location.latitude,
+      longitude: location.longitude,
+      accuracy: location.accuracy,
+      city: locationCity,
+      region: reverseResult && reverseResult.region ? reverseResult.region : nearestCity.region,
+      country: reverseResult && reverseResult.country ? reverseResult.country : nearestCity.country,
+      source: 'gps'
+    };
+
+    const selectedCity = cityService.getByName(locationCity)?.name || nearestCity.name;
+    appState.selectedCity = selectedCity;
+    localStorage.setItem('sajda-city', selectedCity);
+    setLocationStatus(selectedCity, false);
+
+    if (precisionEl) {
+      const accuracyText = Number.isFinite(location.accuracy) && location.accuracy > 0
+        ? `Aniqlik: ${Math.round(location.accuracy)} m`
+        : 'Joylashuv aniqlandi';
+      precisionEl.textContent = `${accuracyText} • ${locationCity}`;
+    }
+
+    await updateMosqueGrid(selectedCity, { latitude: location.latitude, longitude: location.longitude });
+    renderPrayerTimes(selectedCity);
+    const citySelectEl = document.getElementById('city-select');
+    if (citySelectEl) citySelectEl.value = selectedCity;
+    updateProfile();
+  } catch (error) {
+    const isPermissionDenied = error && error.code === 1;
+    const isTimeout = error && error.code === 3;
+    const message = isPermissionDenied
+      ? 'Joylashuvga ruxsat berilmadi. Shaharni qo\'lda tanlang.'
+      : isTimeout
+        ? 'Joylashuv aniqlanmadi. Bir oz kutib, qayta urinib ko\'ring.'
+        : 'Joylashuvni aniqlashda muammo yuz berdi.';
+
+    setLocationStatus(appState.selectedCity, true);
+    if (precisionEl) precisionEl.textContent = message;
+  }
 }
 
 function getNearestCity(latitude, longitude) {
-  const entries = Object.entries(SAJDA_CONFIG.cityProfiles);
-  let nearestCity = entries[0][0];
-  let smallestDistance = Number.POSITIVE_INFINITY;
-
-  entries.forEach(([cityName, coords]) => {
-    const distance = Math.hypot(latitude - coords.lat, longitude - coords.lon);
-    if (distance < smallestDistance) {
-      smallestDistance = distance;
-      nearestCity = cityName;
-    }
-  });
-
-  return nearestCity;
+  return cityService.getNearest(latitude, longitude);
 }
 
 const qiblaState = {
@@ -1193,17 +1397,97 @@ function updateProfile() {
   if (profileStreakEl) profileStreakEl.textContent = `${userProfile.streak || 7} kun`;
 }
 
+function populateCitySelect() {
+  const citySelectEl = document.getElementById('city-select');
+  if (!citySelectEl) return;
+
+  citySelectEl.innerHTML = cityService.getAll().map((city) => `
+    <option value="${city.name}">${city.name}</option>
+  `).join('');
+  citySelectEl.value = appState.selectedCity;
+}
+
+function bindCitySearch(inputId, resultId, targetCallback) {
+  const inputEl = document.getElementById(inputId);
+  const resultEl = document.getElementById(resultId);
+  if (!inputEl || !resultEl) return;
+
+  const renderMatches = (query) => {
+    const matches = cityService.search(query);
+    if (!query.trim() || matches.length === 0) {
+      resultEl.hidden = true;
+      resultEl.innerHTML = '';
+      return;
+    }
+
+    resultEl.hidden = false;
+    resultEl.innerHTML = matches.map((city) => `
+      <button type="button" data-city-name="${city.name}">${city.name} • ${city.region}</button>
+    `).join('');
+  };
+
+  inputEl.addEventListener('input', (event) => {
+    renderMatches(event.target.value);
+  });
+
+  resultEl.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-city-name]');
+    if (!button) return;
+    const cityName = button.dataset.cityName;
+    inputEl.value = cityName;
+    resultEl.hidden = true;
+    resultEl.innerHTML = '';
+    targetCallback(cityName);
+  });
+}
+
+function bindOnboarding() {
+  const modal = document.getElementById('onboarding-modal');
+  const continueBtn = document.getElementById('onboarding-continue-btn');
+  const locationBtn = document.getElementById('onboarding-location-btn');
+  const nameInput = document.getElementById('user-name-input');
+  const languageSelect = document.getElementById('user-language-select');
+
+  if (!modal || !continueBtn || !locationBtn) return;
+
+  const shouldShow = !localStorage.getItem('sajda-onboarding-complete');
+  modal.classList.toggle('hidden', !shouldShow);
+
+  continueBtn.addEventListener('click', () => {
+    const profile = getStoredJSON('sajda-user-profile', { name: 'Siz', streak: 7 });
+    if (nameInput && nameInput.value.trim()) {
+      profile.name = nameInput.value.trim();
+    }
+    if (languageSelect) {
+      profile.language = languageSelect.value;
+    }
+    setStoredJSON('sajda-user-profile', profile);
+    localStorage.setItem('sajda-onboarding-complete', 'true');
+    modal.classList.add('hidden');
+    updateProfile();
+  });
+
+  locationBtn.addEventListener('click', async () => {
+    await requestLocationPermission();
+    localStorage.setItem('sajda-onboarding-complete', 'true');
+    modal.classList.add('hidden');
+  });
+}
+
 function initializeApp() {
+  populateCitySelect();
+  bindCitySearch('city-search', 'city-search-results', (cityName) => {
+    applyCitySelection(cityName, { isManual: true });
+  });
+  bindCitySearch('onboarding-city-search', 'onboarding-city-results', (cityName) => {
+    applyCitySelection(cityName, { isManual: true });
+  });
+  bindOnboarding();
+
   const citySelectEl = document.getElementById('city-select');
   if (citySelectEl) {
-    citySelectEl.value = appState.selectedCity;
     citySelectEl.addEventListener('change', () => {
-      appState.selectedCity = citySelectEl.value;
-      localStorage.setItem('sajda-city', appState.selectedCity);
-      setLocationStatus(appState.selectedCity, true);
-      updateMosqueGrid(appState.selectedCity);
-      renderPrayerTimes(appState.selectedCity);
-      updateProfile();
+      applyCitySelection(citySelectEl.value, { isManual: true });
     });
   }
 

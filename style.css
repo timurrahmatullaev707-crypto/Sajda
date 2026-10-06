@@ -58,6 +58,26 @@ section { position: relative; }
 .language, .login-btn {
   border-radius: 10px; border: 1px solid rgba(14, 42, 32, 0.1); background: rgba(255,255,255,0.35); color: var(--green-900); font-weight: 600;
 }
+.onboarding-modal {
+  position: fixed; inset: 0; background: rgba(7, 29, 22, 0.45); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 24px;
+}
+.onboarding-modal.hidden { display: none; }
+.onboarding-card {
+  width: min(100%, 500px); background: rgba(255,255,255,0.98); border: 1px solid var(--line); border-radius: 28px; padding: 28px; box-shadow: 0 28px 80px rgba(7, 29, 22, 0.2);
+}
+.onboarding-header h2 { margin-top: 10px; color: var(--green-900); font-family: "Playfair Display", serif; font-size: 2.2rem; }
+.onboarding-card p { margin-top: 10px; color: var(--muted); line-height: 1.7; }
+.onboarding-field { display: block; margin-top: 18px; }
+.onboarding-field span { display: block; margin-bottom: 8px; color: var(--green-900); font-weight: 600; }
+.onboarding-field input, .onboarding-field select {
+  width: 100%; min-height: 46px; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; background: rgba(14, 42, 32, 0.02); color: var(--green-900);
+}
+.onboarding-city-results { margin-top: 12px; display: grid; gap: 8px; }
+.onboarding-city-results button {
+  width: 100%; text-align: left; border: 1px solid var(--line); background: var(--white); border-radius: 10px; padding: 10px 12px; color: var(--green-900);
+}
+.onboarding-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.onboarding-location-btn, .onboarding-continue-btn { min-height: 48px; }
 .language { border: none; background: transparent; color: var(--muted); padding: 9px 8px; }
 .login-btn { padding: 10px 18px; transition: transform 0.2s ease, border-color 0.2s ease; }
 .login-btn:hover, .primary-btn:hover, .secondary-btn:hover, .qibla-btn:hover, .zikr-btn:hover, .target-btn:hover, .favorite-btn:hover, .filter-btn:hover { transform: translateY(-1px); }
@@ -160,6 +180,13 @@ section { position: relative; }
 .mosque-bottom a { color: var(--green-700); font-weight: 700; }
 .mosque-bottom button { background: transparent; border: none; color: #81918b; font-size: 1.4rem; }
 .prayer-section { background: var(--green-soft); }
+.city-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.city-search-wrap { position: relative; display: flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 12px; border-radius: 12px; background: var(--white); border: 1px solid var(--line); color: var(--green-900); min-width: min(100%, 220px); }
+.city-search-wrap input { border: none; background: transparent; outline: none; min-width: 0; width: 100%; color: var(--green-900); }
+.city-search-results { position: absolute; top: calc(100% + 8px); left: 0; width: 100%; background: var(--white); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-soft); z-index: 18; overflow: hidden; }
+.city-search-results.hidden { display: none; }
+.city-search-results button { display: block; width: 100%; border: none; background: transparent; text-align: left; padding: 10px 12px; color: var(--green-900); }
+.city-search-results button:hover { background: var(--green-soft); }
 .city-select { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 14px; border-radius: 12px; background: var(--white); border: 1px solid var(--line); color: var(--green-900); font-weight: 600; }
 .city-select select { appearance: none; background: transparent; border: none; outline: none; min-width: 130px; color: var(--green-900); font-weight: 600; }
 .prayer-grid { display: grid; grid-template-columns: repeat(6, minmax(112px, 1fr)); gap: 14px; }
