@@ -11,7 +11,28 @@
   { name: 'Termiz', region: 'Surxondaryo', country: 'O‘zbekiston', lat: 37.216, lon: 67.2788 },
   { name: 'Guliston', region: 'Sirdaryo', country: 'O‘zbekiston', lat: 40.4897, lon: 68.7847 },
   { name: 'Urganch', region: 'Xorazm', country: 'O‘zbekiston', lat: 41.5514, lon: 60.6317 },
-  { name: 'Nukus', region: 'Qoraqalpogʻiston', country: 'O‘zbekiston', lat: 42.4531, lon: 59.6103 }
+  { name: 'Nukus', region: 'Qoraqalpogʻiston', country: 'O‘zbekiston', lat: 42.4531, lon: 59.6103 },
+  { name: 'Xiva', region: 'Xorazm', country: 'O‘zbekiston', lat: 41.3783, lon: 60.3639 },
+  { name: 'Chirchiq', region: 'Toshkent viloyati', country: 'O‘zbekiston', lat: 41.4689, lon: 69.5822 },
+  { name: 'Angren', region: 'Toshkent viloyati', country: 'O‘zbekiston', lat: 40.9069, lon: 70.0283 },
+  { name: 'Olmaliq', region: 'Toshkent viloyati', country: 'O‘zbekiston', lat: 40.8447, lon: 69.5983 },
+  { name: 'Bekobod', region: 'Toshkent viloyati', country: 'O‘zbekiston', lat: 40.2208, lon: 69.2697 },
+  { name: 'Yangiyo‘l', region: 'Toshkent viloyati', country: 'O‘zbekiston', lat: 41.1121, lon: 69.0587 },
+  { name: 'Nurafshon', region: 'Toshkent viloyati', country: 'O‘zbekiston', lat: 41.0381, lon: 69.3625 },
+  { name: 'Parkent', region: 'Toshkent viloyati', country: 'O‘zbekiston', lat: 41.2944, lon: 69.6769 },
+  { name: 'Zangiota', region: 'Toshkent viloyati', country: 'O‘zbekiston', lat: 41.5189, lon: 69.1722 },
+  { name: 'Ohangaron', region: 'Toshkent viloyati', country: 'O‘zbekiston', lat: 40.9061, lon: 69.6383 },
+  { name: 'Kattaqo‘rg‘on', region: 'Samarqand', country: 'O‘zbekiston', lat: 39.8989, lon: 66.2561 },
+  { name: 'Shahrisabz', region: 'Qashqadaryo', country: 'O‘zbekiston', lat: 39.0578, lon: 66.8342 },
+  { name: 'Denov', region: 'Surxondaryo', country: 'O‘zbekiston', lat: 38.2762, lon: 67.8983 },
+  { name: 'Chust', region: 'Namangan', country: 'O‘zbekiston', lat: 41.0031, lon: 71.2373 },
+  { name: 'Marg‘ilon', region: 'Farg‘ona', country: 'O‘zbekiston', lat: 40.4724, lon: 71.7246 },
+  { name: 'Qo‘qon', region: 'Farg‘ona', country: 'O‘zbekiston', lat: 40.5286, lon: 70.9425 },
+  { name: 'Rishton', region: 'Farg‘ona', country: 'O‘zbekiston', lat: 40.3567, lon: 71.2846 },
+  { name: 'Zarafshon', region: 'Navoiy', country: 'O‘zbekiston', lat: 41.5783, lon: 64.2044 },
+  { name: 'Shirin', region: 'Sirdaryo', country: 'O‘zbekiston', lat: 40.2239, lon: 69.0917 },
+  { name: 'Yangiyer', region: 'Sirdaryo', country: 'O‘zbekiston', lat: 40.2750, lon: 68.8228 },
+  { name: 'Mo‘ynoq', region: 'Qoraqalpog‘iston', country: 'O‘zbekiston', lat: 43.7683, lon: 59.0214 }
 ];
 
 const SAJDA_CONFIG = {
@@ -30,74 +51,6 @@ const prayerNameMap = {
   Asr: 'Asr',
   Maghrib: 'Shom',
   Isha: 'Xufton'
-};
-
-const cityMosqueDatabase = {
-  Toshkent: [
-    { name: 'Hazrati Imom', district: 'Shayxontohur', distance: 0.8, address: 'Toshkent, Shayxontohur', lat: 41.2995, lon: 69.2401 },
-    { name: 'Minor masjidi', district: 'Yunusobod', distance: 1.4, address: 'Toshkent, Yunusobod', lat: 41.3817, lon: 69.2861 },
-    { name: 'Imom Buxoriy', district: 'Chilonzor', distance: 2.1, address: 'Toshkent, Chilonzor', lat: 41.2888, lon: 69.1879 }
-  ],
-  Samarqand: [
-    { name: 'Bibi Xonim', district: 'Registon', distance: 1.2, address: 'Samarqand, Registon', lat: 39.6542, lon: 66.9597 },
-    { name: 'Ulug\'bek madrasasi', district: 'Shahrisabz', distance: 2.3, address: 'Samarqand, Registon', lat: 39.6587, lon: 66.9798 },
-    { name: 'Kalon masjidi', district: 'Samarqand markaz', distance: 3.1, address: 'Samarqand, Markaz', lat: 39.6540, lon: 66.9730 }
-  ],
-  Buxoro: [
-    { name: 'Lyab-i Hauz', district: 'Kalon', distance: 0.9, address: 'Buxoro, Lyab-i Hauz', lat: 39.7747, lon: 64.4286 },
-    { name: 'Poyonka masjidi', district: 'Buxoro markaz', distance: 1.7, address: 'Buxoro, Markaz', lat: 39.7732, lon: 64.4211 },
-    { name: 'Kalon masjidi', district: 'Buxoro', distance: 2.4, address: 'Buxoro, Kalon', lat: 39.7744, lon: 64.4311 }
-  ],
-  Andijon: [
-    { name: 'Jami masjidi', district: 'Andijon', distance: 0.7, address: 'Andijon, Markaz', lat: 40.7821, lon: 72.3446 },
-    { name: 'Nurobod masjidi', district: 'Shahrixon', distance: 1.6, address: 'Andijon, Shahrixon', lat: 40.7937, lon: 72.3359 },
-    { name: 'Qadiriya', district: 'Andijon', distance: 2.2, address: 'Andijon, Qadiriya', lat: 40.7810, lon: 72.3520 }
-  ],
-  Namangan: [
-    { name: 'Jami masjidi', district: 'Namangan markaz', distance: 0.9, address: 'Namangan, Markaz', lat: 40.9990, lon: 71.6690 },
-    { name: 'Maqbarai Aisha', district: 'Namangan', distance: 1.8, address: 'Namangan, Aisha', lat: 41.0046, lon: 71.6534 },
-    { name: 'Yakkatut masjidi', district: 'Namangan', distance: 2.5, address: 'Namangan, Yakkatut', lat: 41.0075, lon: 71.7022 }
-  ],
-  'Fargʻona': [
-    { name: 'Fargʻona Jami', district: 'Fargʻona', distance: 0.8, address: 'Fargʻona, Markaz', lat: 40.3864, lon: 71.7866 },
-    { name: 'Markaziy masjid', district: 'Fargʻona', distance: 1.6, address: 'Fargʻona, Ko\'kcha', lat: 40.3779, lon: 71.7855 },
-    { name: 'Abdulla Qodiriy masjidi', district: 'Fargʻona', distance: 2.4, address: 'Fargʻona, Shaxti', lat: 40.3928, lon: 71.8032 }
-  ],
-  Qarshi: [
-    { name: 'Qarshi Jami', district: 'Qarshi', distance: 1.0, address: 'Qarshi, Markaz', lat: 38.8608, lon: 65.7997 },
-    { name: 'Jomiy masjidi', district: 'Qarshi', distance: 1.9, address: 'Qarshi, Gumbaz', lat: 38.8731, lon: 65.7788 },
-    { name: 'Muborak masjid', district: 'Qarshi', distance: 2.7, address: 'Qarshi, Shahriyor', lat: 38.8482, lon: 65.8015 }
-  ],
-  Navoiy: [
-    { name: 'Navoiy Jami', district: 'Navoiy', distance: 1.1, address: 'Navoiy, Markaz', lat: 40.0844, lon: 65.3792 },
-    { name: 'Beshkent masjidi', district: 'Navoiy', distance: 2.1, address: 'Navoiy, Beshkent', lat: 40.0912, lon: 65.3620 },
-    { name: 'Khodja masjidi', district: 'Navoiy', distance: 2.9, address: 'Navoiy, Khodja', lat: 40.0740, lon: 65.3579 }
-  ],
-  Jizzax: [
-    { name: 'Jizzax Jami', district: 'Jizzax', distance: 0.9, address: 'Jizzax, Markaz', lat: 40.1158, lon: 67.8422 },
-    { name: 'Ravshan masjidi', district: 'Jizzax', distance: 1.7, address: 'Jizzax, Gagarin', lat: 40.1242, lon: 67.8684 },
-    { name: 'Muborak masjid', district: 'Jizzax', distance: 2.4, address: 'Jizzax, Ko\'kcha', lat: 40.1080, lon: 67.8300 }
-  ],
-  Termiz: [
-    { name: 'Termiz Jami', district: 'Termiz', distance: 1.2, address: 'Termiz, Markaz', lat: 37.2160, lon: 67.2788 },
-    { name: 'Oq masjid', district: 'Termiz', distance: 1.9, address: 'Termiz, Oq masjid', lat: 37.2223, lon: 67.3005 },
-    { name: 'Shahrisabz masjidi', district: 'Termiz', distance: 2.8, address: 'Termiz, Shahrisabz', lat: 37.1989, lon: 67.2677 }
-  ],
-  Guliston: [
-    { name: 'Guliston Jami', district: 'Guliston', distance: 1.0, address: 'Guliston, Markaz', lat: 40.4897, lon: 68.7847 },
-    { name: 'Sirdaryo masjidi', district: 'Guliston', distance: 1.8, address: 'Guliston, Sirdaryo', lat: 40.4971, lon: 68.7721 },
-    { name: 'Shayxlar masjidi', district: 'Guliston', distance: 2.5, address: 'Guliston, Shayxlar', lat: 40.5028, lon: 68.8011 }
-  ],
-  Urganch: [
-    { name: 'Urganch Jami', district: 'Urganch', distance: 1.0, address: 'Urganch, Markaz', lat: 41.5514, lon: 60.6317 },
-    { name: 'Gulshan masjidi', district: 'Urganch', distance: 1.7, address: 'Urganch, Gulshan', lat: 41.5628, lon: 60.6189 },
-    { name: 'Xorazm masjidi', district: 'Urganch', distance: 2.6, address: 'Urganch, Xorazm', lat: 41.5460, lon: 60.6424 }
-  ],
-  Nukus: [
-    { name: 'Jami masjidi', district: 'Nukus markaz', distance: 1.1, address: 'Nukus, Markaz', lat: 42.4531, lon: 59.6103 },
-    { name: 'Qoraqalpoq masjidi', district: 'Qoraqalpoq', distance: 2.0, address: 'Nukus, Qoraqalpoq', lat: 42.4618, lon: 59.6158 },
-    { name: 'Vohid masjidi', district: 'Nukus', distance: 2.8, address: 'Nukus, Vohid', lat: 42.4573, lon: 59.6230 }
-  ]
 };
 
 const quranCollection = [
@@ -149,28 +102,64 @@ const appState = {
     region: null,
     country: null,
     source: 'manual'
-  }
+  },
+  cityCoordinates: getStoredJSON('sajda-city-coordinates', null)
 };
 
 const cityService = {
   list: UZBEK_CITIES,
+  onlineResults: new Map(),
   getAll() {
     return [...this.list];
   },
   getByName(name) {
-    return this.list.find((city) => city.name.toLowerCase() === String(name || '').trim().toLowerCase()) || null;
+    const normalizedName = normalizeCityQuery(name);
+    return this.list.find((city) => normalizeCityQuery(city.name) === normalizedName)
+      || [...this.onlineResults.values()].flat().find((city) => normalizeCityQuery(city.name) === normalizedName)
+      || null;
   },
   search(query) {
-    const cleaned = String(query || '').trim().toLowerCase();
+    const cleaned = normalizeCityQuery(query);
     if (!cleaned) return this.list;
     return this.list.filter((city) => (
-      city.name.toLowerCase().includes(cleaned)
-      || city.region.toLowerCase().includes(cleaned)
-      || city.country.toLowerCase().includes(cleaned)
+      normalizeCityQuery(city.name).includes(cleaned)
+      || normalizeCityQuery(city.region).includes(cleaned)
+      || normalizeCityQuery(city.country).includes(cleaned)
     )).slice(0, 8);
   },
+  async searchOnline(query, signal) {
+    const cleaned = String(query || '').trim();
+    if (cleaned.length < 3) return [];
+    const cacheKey = normalizeCityQuery(cleaned);
+    if (this.onlineResults.has(cacheKey)) return this.onlineResults.get(cacheKey);
+
+    const url = new URL('https://geocoding-api.open-meteo.com/v1/search');
+    url.search = new URLSearchParams({
+      name: cleaned,
+      count: '8',
+      language: 'uz',
+      format: 'json',
+      countryCode: 'UZ'
+    });
+    const response = await fetchWithTimeout(url.toString(), { headers: { Accept: 'application/json' }, signal }, 8000);
+    if (!response.ok) throw new Error('City search service unavailable');
+    const payload = await response.json();
+    const results = (Array.isArray(payload.results) ? payload.results : []).map((place) => ({
+      name: place.name,
+      region: place.admin1 || place.admin2 || 'O‘zbekiston',
+      country: 'O‘zbekiston',
+      lat: Number(place.latitude),
+      lon: Number(place.longitude),
+      source: 'geocoding'
+    })).filter((place) => place.name
+      && Number.isFinite(place.lat) && place.lat >= -90 && place.lat <= 90
+      && Number.isFinite(place.lon) && place.lon >= -180 && place.lon <= 180);
+    this.onlineResults.set(cacheKey, results);
+    return results;
+  },
   getNearest(latitude, longitude) {
-    if (Number.isNaN(Number(latitude)) || Number.isNaN(Number(longitude))) {
+    if (!Number.isFinite(Number(latitude)) || Number(latitude) < -90 || Number(latitude) > 90
+      || !Number.isFinite(Number(longitude)) || Number(longitude) < -180 || Number(longitude) > 180) {
       return this.getByName(appState.selectedCity) || this.list[0];
     }
 
@@ -178,7 +167,7 @@ const cityService = {
     let shortestDistance = Number.POSITIVE_INFINITY;
 
     this.list.forEach((city) => {
-      const distance = Math.hypot(latitude - city.lat, longitude - city.lon);
+      const distance = haversineDistanceKm(Number(latitude), Number(longitude), city.lat, city.lon);
       if (distance < shortestDistance) {
         shortestDistance = distance;
         nearest = city;
@@ -189,108 +178,219 @@ const cityService = {
   }
 };
 
+function normalizeCityQuery(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[ʻʼ‘’`´]/g, "'")
+    .trim()
+    .toLowerCase();
+}
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  const externalSignal = options.signal;
+  const abortFromCaller = () => controller.abort();
+  if (externalSignal) {
+    if (externalSignal.aborted) controller.abort();
+    else externalSignal.addEventListener('abort', abortFromCaller, { once: true });
+  }
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timeoutId);
+    if (externalSignal) externalSignal.removeEventListener('abort', abortFromCaller);
+  }
+}
+
+let nominatimRequestChain = Promise.resolve();
+let lastNominatimRequestAt = 0;
+
+function requestNominatim(url) {
+  const request = nominatimRequestChain.then(async () => {
+    const waitMs = Math.max(0, 1100 - (Date.now() - lastNominatimRequestAt));
+    if (waitMs) await new Promise((resolve) => setTimeout(resolve, waitMs));
+    lastNominatimRequestAt = Date.now();
+    return fetchWithTimeout(url, {
+      headers: { 'Accept-Language': 'uz,en', Accept: 'application/json' }
+    }, 8000);
+  });
+  nominatimRequestChain = request.then(() => undefined, () => undefined);
+  return request;
+}
 const locationService = {
+  isSecureContext() {
+    return window.isSecureContext
+      || (window.location.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(window.location.hostname));
+  },
   async requestCurrentLocation() {
+    if (!this.isSecureContext()) {
+      const error = new Error('Secure connection required for location');
+      error.code = 'INSECURE_CONTEXT';
+      throw error;
+    }
     if (!navigator.geolocation) {
-      throw new Error('Geolocation is unsupported');
+      const error = new Error('Geolocation is unsupported');
+      error.code = 'UNSUPPORTED';
+      throw error;
     }
 
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
-        (position) => resolve({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          accuracy: position.coords.accuracy,
-          timestamp: position.timestamp
-        }),
+        (position) => {
+          const { latitude, longitude, accuracy } = position.coords;
+          if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90
+            || !Number.isFinite(longitude) || longitude < -180 || longitude > 180) {
+            const error = new Error('Geolocation returned invalid coordinates');
+            error.code = 'INVALID_POSITION';
+            reject(error);
+            return;
+          }
+          resolve({ latitude, longitude, accuracy, timestamp: position.timestamp });
+        },
         (error) => reject(error),
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 60000 }
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
       );
     });
   },
 
   async reverseGeocode(latitude, longitude) {
     const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`;
-    try {
-      const response = await fetch(url, {
-        headers: {
-          'Accept-Language': 'uz,en'
-        }
-      });
-      if (!response.ok) {
-        return null;
-      }
+    const response = await requestNominatim(url);
+    if (!response.ok) throw new Error('Reverse geocoding unavailable');
 
-      const data = await response.json();
-      const address = data && data.address ? data.address : {};
-      const city = address.city || address.town || address.village || address.municipality || 'Joylashuv';
-      const region = address.state || address.region || address.province || 'Hudud';
-      const country = address.country || 'O‘zbekiston';
+    const data = await response.json();
+    const address = data && data.address ? data.address : {};
+    const city = address.city || address.town || address.village || address.municipality || address.county || '';
+    const region = address.state || address.region || address.province || '';
+    const country = address.country || '';
+    if (!city && !region) return null;
 
-      return {
-        city,
-        region,
-        country,
-        display: `${city}, ${region}, ${country}`
-      };
-    } catch (error) {
-      return null;
-    }
+    return { city, region, country, display: [city, region, country].filter(Boolean).join(', ') };
   }
 };
 
 const mosqueService = {
-  buildFallback(cityName) {
-    const base = cityMosqueDatabase[cityName] || cityMosqueDatabase.Toshkent;
-    return base.map((mosque) => ({
-      ...mosque,
-      image: 'https://images.unsplash.com/photo-1518569650153-7c4d74a1d77d?auto=format&fit=crop&w=900&q=80'
-    }));
-  },
-  async getNearbyMosques(latitude, longitude, cityName = appState.selectedCity) {
-    const fallback = this.buildFallback(cityName);
-    const overpassQuery = `
-      [out:json][timeout:25];
-      (
-        node["amenity"="place_of_worship"]["religion"="muslim"](around:8000,${latitude},${longitude});
-        way["amenity"="place_of_worship"]["religion"="muslim"](around:8000,${latitude},${longitude});
-      );
-      out center 8;
-    `;
-
+  cache: new Map(),
+  async getNearbyMosques(latitude, longitude, forceRefresh = false) {
+    const cacheKey = `${latitude.toFixed(3)},${longitude.toFixed(3)}`;
+    const cached = this.cache.get(cacheKey);
+    if (!forceRefresh && cached && Date.now() - cached.timestamp < 300000) return cached.items;
+    const latOffset = 8000 / 111320;
+    const lonOffset = latOffset / Math.max(0.2, Math.cos((latitude * Math.PI) / 180));
+    const searchUrl = new URL('https://nominatim.openstreetmap.org/search');
+    searchUrl.search = new URLSearchParams({
+      format: 'jsonv2',
+      q: 'mosque',
+      viewbox: `${longitude - lonOffset},${latitude + latOffset},${longitude + lonOffset},${latitude - latOffset}`,
+      bounded: '1',
+      limit: '30',
+      addressdetails: '1',
+      extratags: '1'
+    });
+    let nominatimError = null;
     try {
-      const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(overpassQuery)}`;
-      const response = await fetch(url, { cache: 'no-store' });
-      if (!response.ok) throw new Error('Overpass failed');
+      const response = await requestNominatim(searchUrl.toString());
+      if (!response.ok) throw new Error(`Nominatim returned ${response.status}`);
       const payload = await response.json();
-      const elements = Array.isArray(payload.elements) ? payload.elements : [];
-      const results = elements
-        .map((element) => {
-          const lng = element.lon ?? (element.center && element.center.lon);
-          const lat = element.lat ?? (element.center && element.center.lat);
-          if (typeof lat !== 'number' || typeof lng !== 'number') return null;
-          const distance = Math.hypot(latitude - lat, longitude - lng) * 111.32;
+      const items = (Array.isArray(payload) ? payload : [])
+        .filter((place) => place.category === 'amenity'
+          && ['place_of_worship', 'mosque'].includes(place.type)
+          && (!place.extratags?.religion || /muslim|islam/i.test(place.extratags.religion)))
+        .map((place) => {
+          const lat = Number(place.lat);
+          const lon = Number(place.lon);
+          if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
           return {
-            name: element.tags && element.tags.name ? element.tags.name : 'Masjid',
-            address: element.tags && element.tags['addr:street'] ? element.tags['addr:street'] : 'Mahalliy manzil',
-            distance: Number(distance.toFixed(1)),
+            id: `${place.osm_type || 'place'}-${place.osm_id || place.place_id}`,
+            name: place.name || place.extratags?.['name:uz'] || place.display_name?.split(',')[0] || 'Masjid',
+            address: place.display_name || 'Manzil xarita ma’lumotida ko‘rsatilmagan',
+            distance: haversineDistanceKm(latitude, longitude, lat, lon),
             lat,
-            lon: lng,
-            phone: element.tags && element.tags.phone ? element.tags.phone : '',
-            rating: element.tags && element.tags['rating:wisdom'] ? Number(element.tags['rating:wisdom']) : null,
-            image: `https://images.unsplash.com/photo-1518569650153-7c4d74a1d77d?auto=format&fit=crop&w=900&q=80`
+            lon,
+            phone: place.extratags?.phone || place.extratags?.['contact:phone'] || '',
+            openingHours: place.extratags?.opening_hours || '',
+            rating: Number(place.extratags?.rating) || null,
+            image: typeof place.extratags?.image === 'string' && /^https:\/\//i.test(place.extratags.image)
+              ? place.extratags.image
+              : ''
           };
         })
         .filter(Boolean)
+        .filter((place) => place.distance <= 8)
         .sort((a, b) => a.distance - b.distance)
-        .slice(0, 8);
-
-      if (results.length) return results;
+        .slice(0, 24);
+      if (items.length) {
+        this.cache.set(cacheKey, { items, timestamp: Date.now() });
+        return items;
+      }
     } catch (error) {
-      // ignore and fall back to city data
+      nominatimError = error;
     }
 
-    return fallback;
+    const overpassQuery = `
+      [out:json][timeout:10];
+      (
+        node["amenity"="place_of_worship"]["religion"="muslim"](around:8000,${latitude},${longitude});
+        way["amenity"="place_of_worship"]["religion"="muslim"](around:8000,${latitude},${longitude});
+        relation["amenity"="place_of_worship"]["religion"="muslim"](around:8000,${latitude},${longitude});
+        node["building"="mosque"](around:8000,${latitude},${longitude});
+        way["building"="mosque"](around:8000,${latitude},${longitude});
+      );
+      out tags center;
+    `;
+
+    const endpoints = [
+      'https://overpass-api.de/api/interpreter',
+      'https://overpass.kumi.systems/api/interpreter'
+    ];
+    let lastError;
+    for (const endpoint of endpoints) {
+      try {
+        const url = `${endpoint}?data=${encodeURIComponent(overpassQuery)}`;
+        const response = await fetchWithTimeout(url, { headers: { Accept: 'application/json' } }, 8000);
+        if (!response.ok) throw new Error(`Mosque service returned ${response.status}`);
+        const payload = await response.json();
+        const seen = new Set();
+        const items = (Array.isArray(payload.elements) ? payload.elements : [])
+          .map((element) => {
+            const tags = element.tags || {};
+            const lon = element.lon ?? (element.center && element.center.lon);
+            const lat = element.lat ?? (element.center && element.center.lat);
+            if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+            const id = `${element.type || 'place'}-${element.id}`;
+            if (seen.has(id)) return null;
+            seen.add(id);
+            const address = [
+              tags['addr:street'],
+              tags['addr:housenumber'],
+              tags['addr:suburb'] || tags['addr:city']
+            ].filter(Boolean).join(', ');
+            return {
+              id,
+              name: tags.name || tags['name:uz'] || tags['name:en'] || 'Nomsiz masjid',
+              address: address || tags['addr:full'] || 'Manzil xarita ma’lumotida ko‘rsatilmagan',
+              distance: haversineDistanceKm(latitude, longitude, lat, lon),
+              lat,
+              lon,
+              phone: tags.phone || tags['contact:phone'] || '',
+              openingHours: tags.opening_hours || '',
+              rating: Number(tags.rating) || null,
+              image: typeof tags.image === 'string' && /^https:\/\//i.test(tags.image) ? tags.image : ''
+            };
+          })
+          .filter(Boolean)
+          .sort((a, b) => a.distance - b.distance)
+          .slice(0, 24);
+        this.cache.set(cacheKey, { items, timestamp: Date.now() });
+        return items;
+      } catch (error) {
+        lastError = error;
+      }
+    }
+
+    throw new Error('Mosque data services are unavailable', { cause: lastError || nominatimError });
   }
 };
 
@@ -586,8 +686,27 @@ function parseTimeToMinutes(timeText) {
   return hours * 60 + minutes;
 }
 
+function haversineDistanceKm(latitude1, longitude1, latitude2, longitude2) {
+  const radians = (degrees) => (degrees * Math.PI) / 180;
+  const deltaLatitude = radians(latitude2 - latitude1);
+  const deltaLongitude = radians(longitude2 - longitude1);
+  const a = Math.sin(deltaLatitude / 2) ** 2
+    + Math.cos(radians(latitude1)) * Math.cos(radians(latitude2)) * Math.sin(deltaLongitude / 2) ** 2;
+  return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (character) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[character]);
+}
+
 function getCityData(cityName) {
-  return SAJDA_CONFIG.cityProfiles[cityName] || SAJDA_CONFIG.cityProfiles[SAJDA_CONFIG.defaultCity];
+  return cityService.getByName(cityName);
 }
 
 function getCurrentTimeMinutesInTashkent() {
@@ -597,133 +716,146 @@ function getCurrentTimeMinutesInTashkent() {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    hour12: false
+    hourCycle: 'h23'
   });
   const parts = formatter.format(now).split(':').map(Number);
   return parts[0] * 60 + parts[1] + parts[2] / 60;
 }
 
-function getFallbackPrayerTimes(cityName) {
-  const city = getCityData(cityName);
-  const today = new Date();
-  const utcDate = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
-  const seasonalWave = Math.sin((utcDate / 86400000 / 365.25) * (Math.PI * 2) + 1.45) * 16;
-  const latFactor = (city.lat - 41.3) * 1.6;
-
-  const rawTimes = {
-    Fajr: 5 * 60 + 12 + seasonalWave * 0.3 + latFactor * 0.2,
-    Sunrise: 6 * 60 + 38 + seasonalWave * 0.15 + latFactor * 0.18,
-    Dhuhr: 12 * 60 + 31 + seasonalWave * 0.12 + latFactor * 0.32,
-    Asr: 16 * 60 + 42 + seasonalWave * 0.22 + latFactor * 0.7,
-    Maghrib: 18 * 60 + 31 + seasonalWave * 0.14 + latFactor * 0.35,
-    Isha: 19 * 60 + 52 + seasonalWave * 0.28 + latFactor * 0.6
-  };
-
-  const cityOffsets = {
-    Toshkent: { Fajr: 0, Sunrise: 0, Dhuhr: 0, Asr: 0, Maghrib: 0, Isha: 0 },
-    Samarqand: { Fajr: 2, Sunrise: 3, Dhuhr: 1, Asr: 2, Maghrib: 1, Isha: 2 },
-    Buxoro: { Fajr: 4, Sunrise: 4, Dhuhr: 3, Asr: 3, Maghrib: 2, Isha: 4 },
-    Andijon: { Fajr: -1, Sunrise: -1, Dhuhr: 0, Asr: -1, Maghrib: 0, Isha: -1 },
-    Nukus: { Fajr: 6, Sunrise: 5, Dhuhr: 4, Asr: 5, Maghrib: 4, Isha: 6 }
-  };
-
-  const offsetSet = cityOffsets[cityName] || cityOffsets.Toshkent;
-  const times = {};
-
-  prayerOrder.forEach((prayerName) => {
-    const totalMinutes = Math.max(0, Math.round(rawTimes[prayerName] + (offsetSet[prayerName] || 0)));
-    times[prayerName] = formatClock(totalMinutes);
-  });
-
-  return times;
+function getTashkentDateKey(date = new Date()) {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: SAJDA_CONFIG.timezone,
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${values.day}-${values.month}-${values.year}`;
 }
 
-async function fetchPrayerTimesForCity(cityName) {
-  const cityLabel = encodeURIComponent(cityName);
-  const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${cityLabel}&country=Uzbekistan&method=2`;
-
-  try {
-    const response = await fetch(apiUrl, { cache: 'no-store' });
-    if (!response.ok) {
-      throw new Error('Prayer API failed');
-    }
-
-    const payload = await response.json();
-    const timings = payload && payload.data && payload.data.timings ? payload.data.timings : {};
-    const result = {};
-    prayerOrder.forEach((prayerName) => {
-      result[prayerName] = timings[prayerName] || getFallbackPrayerTimes(cityName)[prayerName];
-    });
-
-    return { source: 'api', times: result };
-  } catch (error) {
-    return { source: 'fallback', times: getFallbackPrayerTimes(cityName) };
+function getSelectedCoordinates(cityName = appState.selectedCity) {
+  const location = appState.locationState;
+  if (location.source === 'gps' && Number.isFinite(location.latitude) && Number.isFinite(location.longitude)) {
+    return { latitude: location.latitude, longitude: location.longitude };
   }
+  if (cityName === appState.selectedCity && appState.cityCoordinates
+    && Number.isFinite(appState.cityCoordinates.latitude)
+    && Number.isFinite(appState.cityCoordinates.longitude)) {
+    return appState.cityCoordinates;
+  }
+  const city = getCityData(cityName);
+  if (!city || !Number.isFinite(city.lat) || !Number.isFinite(city.lon)) return null;
+  return { latitude: city.lat, longitude: city.lon };
+}
+
+async function fetchPrayerTimesForCity(cityName, coordinates, signal) {
+  const date = getTashkentDateKey();
+  const apiUrl = new URL(`https://api.aladhan.com/v1/timings/${date}`);
+  apiUrl.search = new URLSearchParams({
+    latitude: String(coordinates.latitude),
+    longitude: String(coordinates.longitude),
+    method: '3',
+    school: '1'
+  });
+  const response = await fetchWithTimeout(apiUrl.toString(), { cache: 'no-store', signal }, 10000);
+  if (!response.ok) throw new Error(`Prayer times service returned ${response.status}`);
+
+  const payload = await response.json();
+  const timings = payload && payload.data && payload.data.timings;
+  if (!timings || payload.code !== 200) throw new Error('Prayer times response was invalid');
+
+  const result = {};
+  prayerOrder.forEach((name) => {
+    const match = String(timings[name] || '').match(/\d{1,2}:\d{2}/);
+    if (!match) throw new Error(`Prayer time missing: ${name}`);
+    result[name] = match[0].padStart(5, '0');
+  });
+  return { cityName, date, times: result };
+}
+
+const prayerTimesState = { times: null, cityName: '', date: '', requestId: 0 };
+const salahOrder = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+let prayerRequestController;
+
+function updatePrayerCountdown() {
+  const { times } = prayerTimesState;
+  if (!times) return;
+
+  const nowMinutes = getCurrentTimeMinutesInTashkent();
+  const entries = salahOrder.map((name) => ({ name, minutes: parseTimeToMinutes(times[name]) }));
+  const next = entries.find((entry) => entry.minutes > nowMinutes) || entries[0];
+  const current = [...entries].reverse().find((entry) => entry.minutes <= nowMinutes) || entries[entries.length - 1];
+  const nextMinutes = next.minutes > nowMinutes ? next.minutes : next.minutes + 24 * 60;
+  const remainingSeconds = Math.max(0, Math.ceil((nextMinutes - nowMinutes) * 60));
+  const hours = Math.floor(remainingSeconds / 3600);
+  const minutes = Math.floor((remainingSeconds % 3600) / 60);
+  const seconds = remainingSeconds % 60;
+
+  const nextPrayerName = document.getElementById('next-prayer-name');
+  if (nextPrayerName) nextPrayerName.textContent = prayerNameMap[next.name];
+  const nextPrayerTime = document.getElementById('next-prayer-time');
+  if (nextPrayerTime) nextPrayerTime.textContent = times[next.name];
+  document.querySelectorAll('[data-prayer-card]').forEach((card) => {
+    const active = card.dataset.prayerCard === next.name;
+    card.classList.toggle('active', active);
+    const label = card.querySelector('small');
+    if (label) label.textContent = active ? 'Keyingi' : '';
+  });
+
+  const countdownEl = document.getElementById('countdown-timer');
+  if (countdownEl) countdownEl.textContent = `${String(hours).padStart(2, '0')} : ${String(minutes).padStart(2, '0')} : ${String(seconds).padStart(2, '0')}`;
+  const statusLabel = document.getElementById('prayer-status-label');
+  if (statusLabel) statusLabel.textContent = prayerNameMap[current.name];
 }
 
 function renderPrayerTimes(cityName) {
   const statusEl = document.getElementById('prayer-api-status');
-  const prayerCards = document.querySelectorAll('[data-prayer-card]');
-
-  const setUi = (times) => {
-    prayerOrder.forEach((prayerName) => {
-      const field = document.getElementById(`time-${prayerName.toLowerCase()}`);
-      if (field) field.textContent = times[prayerName];
-    });
-
-    const nowMinutes = getCurrentTimeMinutesInTashkent();
-    const entries = prayerOrder.map((prayerName) => ({
-      name: prayerName,
-      minutes: parseTimeToMinutes(times[prayerName])
-    }));
-
-    let next = entries.find((entry) => entry.minutes > nowMinutes) || entries[0];
-    const current = [...entries].reverse().find((entry) => entry.minutes <= nowMinutes) || entries[0];
-
-    const nextPrayerName = document.getElementById('next-prayer-name');
-    if (nextPrayerName) nextPrayerName.textContent = prayerNameMap[next.name];
-
-    const nextPrayerTime = document.getElementById('next-prayer-time');
-    if (nextPrayerTime) nextPrayerTime.textContent = times[next.name];
-
-    prayerCards.forEach((card) => {
-      const isActive = card.dataset.prayerCard === next.name;
-      card.classList.toggle('active', isActive);
-      const smallLabel = card.querySelector('small');
-      if (smallLabel) {
-        smallLabel.textContent = isActive ? 'Keyingi' : '';
-      }
-    });
-
-    const remainingMinutes = next.minutes > nowMinutes ? next.minutes - nowMinutes : (next.minutes + 24 * 60) - nowMinutes;
-    const hours = Math.floor(remainingMinutes / 60);
-    const minutes = Math.floor(remainingMinutes % 60);
-    const seconds = Math.max(0, 60 - new Date().getSeconds());
-    const countdownEl = document.getElementById('countdown-timer');
-    if (countdownEl) countdownEl.textContent = `${String(hours).padStart(2, '0')} : ${String(minutes).padStart(2, '0')} : ${String(seconds).padStart(2, '0')}`;
-
-    const statusLabel = document.getElementById('prayer-status-label');
-    const currentPrayerText = current.name === 'Fajr' && nowMinutes < parseTimeToMinutes(times.Fajr) ? 'Bomdod' : prayerNameMap[current.name];
-    if (statusLabel) statusLabel.textContent = currentPrayerText;
-  };
-
+  const retryButton = document.getElementById('prayer-retry-btn');
+  const requestId = ++prayerTimesState.requestId;
+  if (retryButton) retryButton.hidden = true;
+  const coordinates = getSelectedCoordinates(cityName);
+  if (!coordinates) {
+    prayerTimesState.times = null;
+    if (statusEl) statusEl.textContent = 'Bu joy uchun koordinata aniqlanmadi. Internetga ulanib shaharni qayta tanlang.';
+    if (retryButton) retryButton.hidden = false;
+    return;
+  }
+  if (prayerRequestController) prayerRequestController.abort();
+  prayerRequestController = new AbortController();
   if (statusEl) statusEl.textContent = 'Vaqtlar hisoblanmoqda...';
-
-  fetchPrayerTimesForCity(cityName)
+  fetchPrayerTimesForCity(cityName, coordinates, prayerRequestController.signal)
     .then((result) => {
-      setUi(result.times);
-      if (statusEl) {
-        statusEl.textContent = result.source === 'api'
-          ? 'Onlayn ma\'lumotdan yuklandi.'
-          : 'Onlayn ma\'lumot mavjud emas; mahalliy hisob-kitob ishlatilmoqda.';
-      }
+      if (requestId !== prayerTimesState.requestId || cityName !== appState.selectedCity) return;
+      prayerTimesState.times = result.times;
+      prayerTimesState.cityName = result.cityName;
+      prayerTimesState.date = result.date;
+      prayerOrder.forEach((name) => {
+        const field = document.getElementById(`time-${name.toLowerCase()}`);
+        if (field) field.textContent = result.times[name];
+      });
+      if (statusEl) statusEl.textContent = `Aladhan • ${cityName} • Toshkent vaqti (UTC+5)`;
+      if (retryButton) retryButton.hidden = true;
+      updatePrayerCountdown();
+      updateRamadanPrayerTimes();
     })
     .catch(() => {
-      const fallbackTimes = getFallbackPrayerTimes(cityName);
-      setUi(fallbackTimes);
+      if (requestId !== prayerTimesState.requestId) return;
+      prayerTimesState.times = null;
+      prayerOrder.forEach((name) => {
+        const field = document.getElementById(`time-${name.toLowerCase()}`);
+        if (field) field.textContent = '--:--';
+      });
+      document.querySelectorAll('[data-prayer-card]').forEach((card) => card.classList.remove('active'));
       if (statusEl) {
-        statusEl.textContent = 'Vaqtlar mahalliy hisob-kitobdan yuklandi.';
+        statusEl.textContent = 'Namoz vaqtlarini yuklab bo‘lmadi. Internetni tekshirib, shaharni qayta tanlang.';
       }
+      if (retryButton) retryButton.hidden = false;
+      const countdownEl = document.getElementById('countdown-timer');
+      if (countdownEl) countdownEl.textContent = '-- : -- : --';
+      const nextPrayerName = document.getElementById('next-prayer-name');
+      if (nextPrayerName) nextPrayerName.textContent = '—';
+      const nextPrayerTime = document.getElementById('next-prayer-time');
+      if (nextPrayerTime) nextPrayerTime.textContent = '--:--';
     });
 }
 
@@ -751,19 +883,10 @@ function updateLiveClock() {
 
 function updateRamadanCountdown() {
   const now = new Date();
+  updateRamadanPrayerTimes();
   const countdownTextEl = document.getElementById('ramadan-countdown-text');
   const ramadanDayEl = document.getElementById('ramadan-day');
-  const ramadanSuhoorEl = document.getElementById('ramadan-suhoor');
-  const ramadanIftarEl = document.getElementById('ramadan-iftar');
   const ramadanStatusPillEl = document.getElementById('ramadan-status-pill');
-  const selectedCity = appState.selectedCity || SAJDA_CONFIG.defaultCity;
-  const times = getFallbackPrayerTimes(selectedCity);
-
-  const suhoorTime = formatClock(parseTimeToMinutes(times.Fajr) - 90);
-  const iftarTime = times.Maghrib;
-
-  if (ramadanSuhoorEl) ramadanSuhoorEl.textContent = suhoorTime;
-  if (ramadanIftarEl) ramadanIftarEl.textContent = iftarTime;
 
   if (now >= SAJDA_CONFIG.ramadanStart && now <= SAJDA_CONFIG.ramadanEnd) {
     const remainingMs = SAJDA_CONFIG.ramadanEnd.getTime() - now.getTime();
@@ -786,39 +909,64 @@ function updateRamadanCountdown() {
   if (ramadanDayEl) ramadanDayEl.textContent = `${days + 1} kun`;
 }
 
+function updateRamadanPrayerTimes() {
+  const times = prayerTimesState.times;
+  if (!times) return;
+  const suhoor = document.getElementById('ramadan-suhoor');
+  const iftar = document.getElementById('ramadan-iftar');
+  if (suhoor) suhoor.textContent = times.Fajr;
+  if (iftar) iftar.textContent = times.Maghrib;
+}
+
 function setLocationStatus(cityName, isManual = false) {
   const cityLabel = cityName || SAJDA_CONFIG.defaultCity;
   const locationStatusEl = document.getElementById('location-status');
   if (locationStatusEl) {
-    locationStatusEl.innerHTML = `<span>●</span> ${cityLabel} shahri`;
+    locationStatusEl.replaceChildren();
+    const dot = document.createElement('span');
+    dot.textContent = '●';
+    const label = document.createTextNode(` ${cityLabel}`);
+    locationStatusEl.append(dot, label);
   }
 
   const precisionEl = document.getElementById('location-precision-pill');
   if (precisionEl) {
-    precisionEl.textContent = isManual ? "Shahar qo'lda tanlandi" : 'Joylashuv aniqlandi';
+    precisionEl.textContent = isManual ? `Shahar qo‘lda tanlandi • ${cityLabel}` : `Joylashuv aniqlandi • ${cityLabel}`;
   }
 }
 
-function getMosqueFallbackForCity(cityName) {
-  const safeCityName = cityName && SAJDA_CONFIG.cityProfiles[cityName] ? cityName : SAJDA_CONFIG.defaultCity;
-  const scored = cityMosqueDatabase[safeCityName] || cityMosqueDatabase[SAJDA_CONFIG.defaultCity];
-  return (scored || []).map((mosque, index) => ({
-    ...mosque,
-    id: `${safeCityName}-${index}`,
-    openingHours: mosque.openingHours || '5 mahal',
-    image: 'https://images.unsplash.com/photo-1518569650153-7c4d74a1d77d?auto=format&fit=crop&w=900&q=80'
-  }));
-}
-
 function applyCitySelection(cityName, options = {}) {
-  const safeCityName = cityName && SAJDA_CONFIG.cityProfiles[cityName] ? cityName : SAJDA_CONFIG.defaultCity;
+  const selectedPlace = typeof cityName === 'object' && cityName !== null
+    ? cityName
+    : cityService.getByName(cityName);
+  if (!selectedPlace) return;
+  const safeCityName = selectedPlace.name;
+  const coordinates = options.coordinates
+    || (Number.isFinite(selectedPlace.lat) && Number.isFinite(selectedPlace.lon)
+      ? { latitude: selectedPlace.lat, longitude: selectedPlace.lon }
+      : null);
   const isManualSelection = Boolean(options.isManual);
 
   appState.selectedCity = safeCityName;
   appState.manualCitySelected = isManualSelection;
+  appState.cityCoordinates = coordinates;
+  appState.locationState = {
+    latitude: null,
+    longitude: null,
+    accuracy: null,
+    city: safeCityName,
+    region: selectedPlace.region || '',
+    country: selectedPlace.country || 'O‘zbekiston',
+    source: 'manual'
+  };
 
   if (options.persist !== false) {
     localStorage.setItem('sajda-city', safeCityName);
+    if (coordinates) {
+      localStorage.setItem('sajda-city-coordinates', JSON.stringify(coordinates));
+    } else {
+      localStorage.removeItem('sajda-city-coordinates');
+    }
   }
 
   if (isManualSelection) {
@@ -830,63 +978,112 @@ function applyCitySelection(cityName, options = {}) {
   setLocationStatus(safeCityName, isManualSelection);
 
   const citySelectEl = document.getElementById('city-select');
-  if (citySelectEl) citySelectEl.value = safeCityName;
+  if (citySelectEl) {
+    let option = [...citySelectEl.options].find((item) => normalizeCityQuery(item.value) === normalizeCityQuery(safeCityName));
+    if (!option) {
+      option = new Option(`${safeCityName} • ${selectedPlace.region || 'O‘zbekiston'}`, safeCityName);
+      citySelectEl.add(option);
+    }
+    citySelectEl.value = safeCityName;
+  }
 
-  updateMosqueGrid(safeCityName, options.coordinates || null);
+  updateMosqueGrid(safeCityName, coordinates);
   renderPrayerTimes(safeCityName);
   updateProfile();
 }
 
-async function updateMosqueGrid(cityName = appState.selectedCity, coordinates = null) {
+let mosqueRequestId = 0;
+let mosquesExpanded = false;
+let locationRequestInProgress = false;
+
+async function updateMosqueGrid(cityName = appState.selectedCity, coordinates = null, forceRefresh = false) {
   const grid = document.getElementById('mosque-grid');
   if (!grid) return;
 
-  const safeCityName = cityName && SAJDA_CONFIG.cityProfiles[cityName] ? cityName : SAJDA_CONFIG.defaultCity;
-  let items = getMosqueFallbackForCity(safeCityName);
-
-  if (coordinates && Number.isFinite(coordinates.latitude) && Number.isFinite(coordinates.longitude)) {
-    const nearby = await mosqueService.getNearbyMosques(coordinates.latitude, coordinates.longitude, safeCityName);
-    items = nearby && nearby.length ? nearby : items;
+  const requestId = ++mosqueRequestId;
+  const placeCoordinates = coordinates || getSelectedCoordinates(cityName);
+  const statusEl = document.getElementById('mosque-status');
+  const retryBtn = document.getElementById('mosque-retry-btn');
+  const viewAllBtn = document.getElementById('mosque-view-all');
+  if (statusEl) statusEl.textContent = 'Yaqin masjidlar xarita ma’lumotlaridan qidirilmoqda...';
+  if (retryBtn) retryBtn.hidden = true;
+  if (viewAllBtn) viewAllBtn.hidden = true;
+  if (!placeCoordinates || !Number.isFinite(placeCoordinates.latitude) || !Number.isFinite(placeCoordinates.longitude)) {
+    if (statusEl) statusEl.textContent = 'Tanlangan joy koordinatalari topilmadi. Shaharni qidirib qayta tanlang.';
+    if (retryBtn) retryBtn.hidden = false;
+    return;
   }
 
-  grid.innerHTML = items.map((mosque, index) => {
-    const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((mosque.name || 'Masjid') + ' ' + (mosque.address || 'Uzbekistan'))}`;
-    const distanceLabel = typeof mosque.distance === 'number' ? `${mosque.distance.toFixed(1)} km` : 'Yaqin';
-    const imgUrl = mosque.image || 'https://images.unsplash.com/photo-1518569650153-7c4d74a1d77d?auto=format&fit=crop&w=900&q=80';
-    return `
-      <article class="mosque-card">
-        <div class="mosque-image" style="background-image: linear-gradient(rgba(2,12,10,0.2), rgba(2,12,10,0.3)), url('${imgUrl}');">
-          <span class="distance">${distanceLabel}</span>
-        </div>
-        <div class="mosque-info">
-          <div class="mosque-title">
-            <h3>${mosque.name}</h3>
-            <span class="verified">✓</span>
+  try {
+    const items = await mosqueService.getNearbyMosques(
+      placeCoordinates.latitude,
+      placeCoordinates.longitude,
+      forceRefresh
+    );
+    if (requestId !== mosqueRequestId || cityName !== appState.selectedCity) return;
+    mosquesExpanded = false;
+    grid.innerHTML = items.map((mosque, index) => {
+      const destination = new URLSearchParams({
+        api: '1',
+        destination: `${mosque.lat},${mosque.lon}`,
+        travelmode: 'walking'
+      });
+      const mapLink = `https://www.google.com/maps/dir/?${destination.toString()}`;
+      const distanceLabel = `${mosque.distance < 1 ? Math.round(mosque.distance * 1000) + ' m' : mosque.distance.toFixed(1) + ' km'}${appState.locationState.source === 'manual' ? ' · taxminiy' : ''}`;
+      const imageUrl = typeof mosque.image === 'string' && /^https:\/\//i.test(mosque.image) ? mosque.image : '';
+      const imageMarkup = imageUrl
+        ? `<img class="mosque-photo" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(mosque.name)}" loading="lazy">`
+        : '';
+      return `
+        <article class="mosque-card" ${index >= 6 ? 'hidden' : ''}>
+          <div class="mosque-image${imageUrl ? '' : ' has-fallback'}">
+            ${imageMarkup}
+            <span class="distance">${escapeHtml(distanceLabel)}</span>
           </div>
-          <p>${mosque.address || 'Masjid manzili ma\'lum emas'}</p>
-          <div class="mosque-bottom">
-            <span>🕐 ${mosque.openingHours || '5 mahal'}</span>
-            <a href="${mapLink}" target="_blank" rel="noreferrer">Yo‘nalish</a>
+          <div class="mosque-info">
+            <div class="mosque-title"><h3>${escapeHtml(mosque.name)}</h3></div>
+            <p>${escapeHtml(mosque.address)}</p>
+            ${mosque.openingHours ? `<p>🕐 ${escapeHtml(mosque.openingHours)}</p>` : ''}
+            ${mosque.phone ? `<p>☎ ${escapeHtml(mosque.phone)}</p>` : ''}
+            ${Number.isFinite(mosque.rating) ? `<p>★ ${mosque.rating.toFixed(1)}</p>` : ''}
+            <div class="mosque-bottom">
+              <span>📍 ${escapeHtml(distanceLabel)}</span>
+              <a href="${mapLink}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(mosque.name)} xaritada yo‘nalish">Yo‘nalish</a>
+            </div>
           </div>
-        </div>
-      </article>
-    `;
-  }).join('');
+        </article>
+      `;
+    }).join('');
+    grid.querySelectorAll('.mosque-photo').forEach((image) => {
+      image.addEventListener('error', () => {
+        image.remove();
+        image.parentElement.classList.add('has-fallback');
+      }, { once: true });
+    });
+    if (statusEl) {
+      statusEl.textContent = items.length
+        ? `${items.length} ta masjid topildi • OpenStreetMap ma’lumotlari`
+        : `${cityName} yaqinida xarita ma’lumotlarida masjid topilmadi.`;
+    }
+    if (viewAllBtn) viewAllBtn.hidden = items.length <= 6;
+  } catch (error) {
+    if (requestId !== mosqueRequestId) return;
+    grid.replaceChildren();
+    if (statusEl) statusEl.textContent = 'Masjidlarni yuklashda muammo yuz berdi. Internetni tekshirib, qayta urinib ko‘ring.';
+    if (retryBtn) retryBtn.hidden = false;
+  }
 }
 
 async function requestLocationPermission(forceOverride = false) {
   const precisionEl = document.getElementById('location-precision-pill');
-  if (!navigator.geolocation) {
-    if (precisionEl) precisionEl.textContent = 'Brauzer geolokatsiyani qo\'llab-quvvatlamaydi.';
-    return;
-  }
-
   if (!forceOverride && appState.manualCitySelected) {
     if (precisionEl) {
       precisionEl.textContent = `Shahar qo\'lda tanlangan: ${appState.selectedCity}. Joylashuvni yangilash uchun qayta bosing.`;
     }
-    return;
+    return false;
   }
+  if (locationRequestInProgress) return false;
+  locationRequestInProgress = true;
 
   if (precisionEl) {
     precisionEl.textContent = 'Joylashuv aniqlanmoqda...';
@@ -894,52 +1091,89 @@ async function requestLocationPermission(forceOverride = false) {
 
   try {
     const location = await locationService.requestCurrentLocation();
-    const reverseResult = await locationService.reverseGeocode(location.latitude, location.longitude);
+    let reverseResult = null;
+    let reverseGeocodeFailed = false;
+    try {
+      reverseResult = await locationService.reverseGeocode(location.latitude, location.longitude);
+    } catch (error) {
+      reverseGeocodeFailed = true;
+    }
     const nearestCity = cityService.getNearest(location.latitude, location.longitude);
-    const locationCity = reverseResult && reverseResult.city && reverseResult.city !== 'Joylashuv'
-      ? reverseResult.city
-      : nearestCity.name;
+    const nearestDistance = haversineDistanceKm(location.latitude, location.longitude, nearestCity.lat, nearestCity.lon);
+    const resolvedCity = reverseResult && reverseResult.city
+      ? cityService.getByName(reverseResult.city) || { name: reverseResult.city, lat: nearestCity.lat, lon: nearestCity.lon }
+      : null;
+    const locationCity = resolvedCity
+      ? resolvedCity.name
+      : nearestDistance <= 100
+        ? nearestCity.name
+        : 'Joylashuv';
 
     appState.locationState = {
       latitude: location.latitude,
       longitude: location.longitude,
       accuracy: location.accuracy,
       city: locationCity,
-      region: reverseResult && reverseResult.region ? reverseResult.region : nearestCity.region,
+      region: reverseResult && reverseResult.region ? reverseResult.region : nearestDistance <= 100 ? nearestCity.region : '',
       country: reverseResult && reverseResult.country ? reverseResult.country : nearestCity.country,
       source: 'gps'
     };
 
-    const selectedCity = cityService.getByName(locationCity)?.name || nearestCity.name;
+    const selectedCity = locationCity === 'Joylashuv'
+      ? (appState.locationState.region || 'Joylashuvingiz')
+      : locationCity;
     appState.selectedCity = selectedCity;
     appState.manualCitySelected = false;
+    appState.cityCoordinates = null;
     localStorage.setItem('sajda-city', selectedCity);
     localStorage.removeItem('sajda-city-source');
+    localStorage.removeItem('sajda-city-coordinates');
     setLocationStatus(selectedCity, false);
 
     if (precisionEl) {
       const accuracyText = Number.isFinite(location.accuracy) && location.accuracy > 0
         ? `Aniqlik: ${Math.round(location.accuracy)} m`
         : 'Joylashuv aniqlandi';
-      precisionEl.textContent = `${accuracyText} • ${locationCity}`;
+      const accuracyWarning = location.accuracy > 5000 ? ' • Aniqlik past, GPS xizmatini tekshiring' : '';
+      const geocodeNotice = reverseGeocodeFailed || !locationCity || locationCity === 'Joylashuv'
+        ? ' • Hudud nomi vaqtincha aniqlanmadi'
+        : '';
+      precisionEl.textContent = `${accuracyText}${accuracyWarning}${geocodeNotice}`;
     }
 
     await updateMosqueGrid(selectedCity, { latitude: location.latitude, longitude: location.longitude });
     renderPrayerTimes(selectedCity);
     const citySelectEl = document.getElementById('city-select');
-    if (citySelectEl) citySelectEl.value = selectedCity;
+    if (citySelectEl) {
+      let option = [...citySelectEl.options].find((item) => normalizeCityQuery(item.value) === normalizeCityQuery(selectedCity));
+      if (!option) {
+        option = new Option(selectedCity, selectedCity);
+        citySelectEl.add(option);
+      }
+      citySelectEl.value = selectedCity;
+    }
     updateProfile();
+    locationRequestInProgress = false;
+    return true;
   } catch (error) {
     const isPermissionDenied = error && error.code === 1;
     const isTimeout = error && error.code === 3;
-    const message = isPermissionDenied
-      ? 'Joylashuvga ruxsat berilmadi. Shaharni qo\'lda tanlang.'
-      : isTimeout
-        ? 'Joylashuv aniqlanmadi. Bir oz kutib, qayta urinib ko\'ring.'
-        : 'Joylashuvni aniqlashda muammo yuz berdi.';
+    const message = error && error.code === 'INSECURE_CONTEXT'
+      ? 'Joylashuv uchun xavfsiz HTTPS ulanish kerak. localhost developmentda ishlashi mumkin.'
+      : error && error.code === 'UNSUPPORTED'
+        ? 'Brauzer joylashuvni aniqlashni qo‘llab-quvvatlamaydi. Shaharni qo‘lda tanlang.'
+        : isPermissionDenied
+          ? 'Joylashuvga ruxsat berilmadi. Shaharni qo‘lda tanlashingiz mumkin.'
+          : isTimeout
+            ? 'Joylashuvni aniqlash vaqti tugadi. GPS’ni tekshirib, qayta urinib ko‘ring.'
+            : error && error.code === 2
+              ? 'Joylashuvni aniqlab bo‘lmadi. GPS yoki tarmoq xizmatini tekshiring.'
+              : 'Joylashuvni aniqlab bo‘lmadi. Shaharni qo‘lda tanlang yoki qayta urinib ko‘ring.';
 
     setLocationStatus(appState.selectedCity, appState.manualCitySelected);
     if (precisionEl) precisionEl.textContent = message;
+    locationRequestInProgress = false;
+    return false;
   }
 }
 
@@ -1101,18 +1335,29 @@ function bindOrientationSensor() {
 
 function findQiblaDirection() {
   const city = getCityData(appState.selectedCity);
-  const fallbackBearing = calculateBearing(city.lat, city.lon);
+  const location = appState.locationState;
+  const coordinates = location.source === 'gps' && Number.isFinite(location.latitude) && Number.isFinite(location.longitude)
+    ? { latitude: location.latitude, longitude: location.longitude }
+    : getSelectedCoordinates(appState.selectedCity);
+  const fallbackBearing = coordinates
+    ? calculateBearing(coordinates.latitude, coordinates.longitude)
+    : city
+      ? calculateBearing(city.lat, city.lon)
+      : null;
   const retryBtn = document.getElementById('qibla-retry-btn');
   const secureContext = window.isSecureContext || (window.location.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(window.location.hostname));
 
-  qiblaState.bearing = fallbackBearing;
-  updateQiblaReadout(fallbackBearing);
-  setCompassRotation(fallbackBearing);
+  if (fallbackBearing !== null) {
+    qiblaState.bearing = fallbackBearing;
+    updateQiblaReadout(fallbackBearing);
+    setCompassRotation(fallbackBearing);
+  }
   updateQiblaDebug();
 
   if (!secureContext) {
     qiblaState.permissionStatus = 'Denied';
     setStatusMessage('Qibla kompasini ishlatish uchun xavfsiz HTTPS ulanish kerak.');
+    if (fallbackBearing === null) setStatusMessage('Qibla yo‘nalishi uchun avval shaharni yoki joylashuvni tanlang. Kompas uchun HTTPS kerak.');
     if (retryBtn) retryBtn.hidden = false;
     updateQiblaDebug();
     return;
@@ -1121,7 +1366,9 @@ function findQiblaDirection() {
   if (!navigator.geolocation) {
     qiblaState.locationAvailable = false;
     qiblaState.permissionStatus = 'Unavailable';
-    setStatusMessage(`Qibla yo'nalishi: ${Math.round(fallbackBearing)}° (geolokatsiya bu brauzerda mavjud emas).`);
+    setStatusMessage(fallbackBearing === null
+      ? 'Qibla kompas sensori bu qurilmada mavjud emas. Yo‘nalish uchun shaharni tanlang.'
+      : `Qibla yo'nalishi: ${Math.round(fallbackBearing)}° (geolokatsiya bu brauzerda mavjud emas).`);
     if (retryBtn) retryBtn.hidden = true;
     updateQiblaDebug();
     bindOrientationSensor();
@@ -1150,8 +1397,10 @@ function findQiblaDirection() {
     (error) => {
       qiblaState.locationAvailable = false;
       qiblaState.permissionStatus = error && error.code === 1 ? 'Denied' : 'Error';
-      setCompassRotation(fallbackBearing);
-      updateQiblaReadout(fallbackBearing);
+      if (fallbackBearing !== null) {
+        setCompassRotation(fallbackBearing);
+        updateQiblaReadout(fallbackBearing);
+      }
       setStatusMessage(error && error.code === 1
         ? 'Joylashuvga ruxsat berilmadi. Qibla yo‘nalishi shahar ma’lumotiga asoslangan holda ko‘rsatilmoqda.'
         : 'Joylashuv olinmadi. Internet yoki lokatsiya xizmatini tekshirib ko‘ring.');
@@ -1184,11 +1433,20 @@ function initQiblaCompass() {
     retryButtonEl.addEventListener('click', findQiblaDirection);
   }
 
+  const initialCoordinates = getSelectedCoordinates(appState.selectedCity);
   const defaultCity = getCityData(appState.selectedCity);
-  const initialBearing = calculateBearing(defaultCity.lat, defaultCity.lon);
-  qiblaState.bearing = initialBearing;
-  updateQiblaReadout(initialBearing);
-  setCompassRotation(initialBearing);
+  const initialBearing = initialCoordinates
+    ? calculateBearing(initialCoordinates.latitude, initialCoordinates.longitude)
+    : defaultCity
+      ? calculateBearing(defaultCity.lat, defaultCity.lon)
+      : null;
+  if (initialBearing !== null) {
+    qiblaState.bearing = initialBearing;
+    updateQiblaReadout(initialBearing);
+    setCompassRotation(initialBearing);
+  } else {
+    setStatusMessage('Qibla yo‘nalishini ko‘rish uchun shaharni qidiring yoki joylashuvni aniqlang.');
+  }
   updateQiblaDebug();
 
   if (window.DeviceOrientationEvent) {
@@ -1475,8 +1733,12 @@ function populateCitySelect() {
   if (!citySelectEl) return;
 
   citySelectEl.innerHTML = cityService.getAll().map((city) => `
-    <option value="${city.name}">${city.name}</option>
+    <option value="${escapeHtml(city.name)}">${escapeHtml(city.name)}</option>
   `).join('');
+  if (!cityService.getByName(appState.selectedCity)) {
+    const option = new Option(appState.selectedCity, appState.selectedCity);
+    citySelectEl.add(option);
+  }
   citySelectEl.value = appState.selectedCity;
 }
 
@@ -1485,32 +1747,69 @@ function bindCitySearch(inputId, resultId, targetCallback) {
   const resultEl = document.getElementById(resultId);
   if (!inputEl || !resultEl) return;
 
-  const renderMatches = (query) => {
-    const matches = cityService.search(query);
-    if (!query.trim() || matches.length === 0) {
+  let debounceId;
+  let activeController;
+  let searchId = 0;
+  let visibleMatches = [];
+
+  const renderMatches = (query, onlineMatches = [], message = '') => {
+    const localMatches = cityService.search(query);
+    const allMatches = [...localMatches, ...onlineMatches.filter((place) => (
+      !localMatches.some((city) => normalizeCityQuery(city.name) === normalizeCityQuery(place.name))
+    ))].slice(0, 10);
+    visibleMatches = allMatches;
+    if (!query.trim() || (!allMatches.length && !message)) {
       resultEl.hidden = true;
       resultEl.innerHTML = '';
       return;
     }
 
     resultEl.hidden = false;
-    resultEl.innerHTML = matches.map((city) => `
-      <button type="button" data-city-name="${city.name}">${city.name} • ${city.region}</button>
-    `).join('');
+    resultEl.innerHTML = `${allMatches.map((city, index) => `
+      <button type="button" role="option" data-city-index="${index}">
+        ${escapeHtml(city.name)} • ${escapeHtml(city.region)}
+      </button>
+    `).join('')}${message ? `<p class="city-search-message">${escapeHtml(message)}</p>` : ''}`;
   };
 
   inputEl.addEventListener('input', (event) => {
-    renderMatches(event.target.value);
+    const query = event.target.value;
+    clearTimeout(debounceId);
+    if (activeController) activeController.abort();
+    searchId += 1;
+    const currentSearchId = searchId;
+    renderMatches(query);
+
+    if (query.trim().length < 3 || cityService.getByName(query)) return;
+    debounceId = setTimeout(async () => {
+      activeController = new AbortController();
+      try {
+        const onlineMatches = await cityService.searchOnline(query, activeController.signal);
+        if (currentSearchId === searchId) renderMatches(query, onlineMatches);
+      } catch (error) {
+        if (error.name === 'AbortError' || currentSearchId !== searchId) return;
+        if (!cityService.search(query).length) {
+          renderMatches(query, [], 'Onlayn qidiruv vaqtincha ishlamadi. Internetni tekshiring.');
+        }
+      }
+    }, 650);
+  });
+
+  inputEl.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' || resultEl.hidden || !visibleMatches.length) return;
+    event.preventDefault();
+    resultEl.querySelector('[data-city-index="0"]')?.click();
   });
 
   resultEl.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-city-name]');
+    const button = event.target.closest('[data-city-index]');
     if (!button) return;
-    const cityName = button.dataset.cityName;
-    inputEl.value = cityName;
+    const place = visibleMatches[Number(button.dataset.cityIndex)];
+    if (!place) return;
+    inputEl.value = place.name;
     resultEl.hidden = true;
     resultEl.innerHTML = '';
-    targetCallback(cityName);
+    targetCallback(place);
   });
 }
 
@@ -1520,9 +1819,13 @@ function bindOnboarding() {
   const locationBtn = document.getElementById('onboarding-location-btn');
   const nameInput = document.getElementById('user-name-input');
   const languageSelect = document.getElementById('user-language-select');
+  const onboardingStatus = document.getElementById('onboarding-status');
 
   if (!modal || !continueBtn || !locationBtn) return;
 
+  const savedProfile = getStoredJSON('sajda-user-profile', {});
+  if (nameInput && savedProfile.name && savedProfile.name !== 'Siz') nameInput.value = savedProfile.name;
+  if (languageSelect && savedProfile.language) languageSelect.value = savedProfile.language;
   const shouldShow = !localStorage.getItem('sajda-onboarding-complete');
   modal.classList.toggle('hidden', !shouldShow);
 
@@ -1534,6 +1837,11 @@ function bindOnboarding() {
     if (languageSelect) {
       profile.language = languageSelect.value;
     }
+    const chosenCity = document.getElementById('onboarding-city-search')?.value.trim();
+    if (chosenCity) {
+      const city = cityService.getByName(chosenCity);
+      if (city) applyCitySelection(city, { isManual: true });
+    }
     setStoredJSON('sajda-user-profile', profile);
     localStorage.setItem('sajda-onboarding-complete', 'true');
     modal.classList.add('hidden');
@@ -1541,14 +1849,41 @@ function bindOnboarding() {
   });
 
   locationBtn.addEventListener('click', async () => {
-    await requestLocationPermission(true);
-    localStorage.setItem('sajda-onboarding-complete', 'true');
-    modal.classList.add('hidden');
+    if (onboardingStatus) onboardingStatus.textContent = 'Joylashuv aniqlanmoqda...';
+    const located = await requestLocationPermission(true);
+    if (located) {
+      localStorage.setItem('sajda-onboarding-complete', 'true');
+      modal.classList.add('hidden');
+    } else if (onboardingStatus) {
+      onboardingStatus.textContent = 'Joylashuv aniqlanmadi. Shaharni qidirib tanlang yoki davom eting.';
+    }
+  });
+
+  document.getElementById('profile-edit-btn')?.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    if (onboardingStatus) onboardingStatus.textContent = 'Profil sozlamalaringiz shu qurilmada saqlanadi.';
   });
 }
 
-function initializeApp() {
+async function initializeApp() {
   populateCitySelect();
+  const mobileMenuButton = document.getElementById('mobile-menu-toggle');
+  const primaryNavigation = document.getElementById('primary-navigation');
+  const closeMobileNavigation = () => {
+    if (!mobileMenuButton || !primaryNavigation) return;
+    primaryNavigation.classList.remove('is-open');
+    mobileMenuButton.setAttribute('aria-expanded', 'false');
+    mobileMenuButton.setAttribute('aria-label', 'Navigatsiya menyusini ochish');
+  };
+  mobileMenuButton?.addEventListener('click', () => {
+    const isOpen = primaryNavigation.classList.toggle('is-open');
+    mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+    mobileMenuButton.setAttribute('aria-label', isOpen ? 'Navigatsiya menyusini yopish' : 'Navigatsiya menyusini ochish');
+  });
+  primaryNavigation?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileNavigation));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMobileNavigation();
+  });
   bindCitySearch('city-search', 'city-search-results', (cityName) => {
     applyCitySelection(cityName, { isManual: true });
   });
@@ -1556,6 +1891,26 @@ function initializeApp() {
     applyCitySelection(cityName, { isManual: true });
   });
   bindOnboarding();
+
+  if (!cityService.getByName(appState.selectedCity)
+    && (!appState.cityCoordinates
+      || !Number.isFinite(appState.cityCoordinates.latitude)
+      || !Number.isFinite(appState.cityCoordinates.longitude))) {
+    try {
+      const matches = await cityService.searchOnline(appState.selectedCity);
+      const match = matches.find((city) => normalizeCityQuery(city.name) === normalizeCityQuery(appState.selectedCity))
+        || matches[0];
+      if (match) {
+        appState.selectedCity = match.name;
+        appState.cityCoordinates = { latitude: match.lat, longitude: match.lon };
+        localStorage.setItem('sajda-city', match.name);
+        localStorage.setItem('sajda-city-coordinates', JSON.stringify(appState.cityCoordinates));
+      }
+    } catch (error) {
+      const precisionEl = document.getElementById('location-precision-pill');
+      if (precisionEl) precisionEl.textContent = 'Tanlangan joy koordinatalari olinmadi. Shaharni qayta tanlang.';
+    }
+  }
 
   const citySelectEl = document.getElementById('city-select');
   if (citySelectEl) {
@@ -1574,6 +1929,20 @@ function initializeApp() {
       }
     });
   }
+  document.getElementById('mosque-retry-btn')?.addEventListener('click', () => {
+    updateMosqueGrid(appState.selectedCity, null, true);
+  });
+  document.getElementById('prayer-retry-btn')?.addEventListener('click', () => {
+    renderPrayerTimes(appState.selectedCity);
+  });
+  document.getElementById('mosque-view-all')?.addEventListener('click', (event) => {
+    mosquesExpanded = !mosquesExpanded;
+    document.querySelectorAll('#mosque-grid .mosque-card').forEach((card, index) => {
+      card.hidden = !mosquesExpanded && index >= 6;
+    });
+    event.currentTarget.textContent = mosquesExpanded ? 'Faqat eng yaqinlarini ko‘rish ↑' : 'Barchasini ko‘rish →';
+    event.currentTarget.setAttribute('aria-expanded', String(mosquesExpanded));
+  });
 
   setLocationStatus(appState.selectedCity, true);
   updateMosqueGrid(appState.selectedCity);
@@ -1596,10 +1965,16 @@ function initializeApp() {
     });
   }
 
+  let prayerDate = getTashkentDateKey();
   setInterval(() => {
     updateLiveClock();
     updateRamadanCountdown();
-    renderPrayerTimes(appState.selectedCity);
+    updatePrayerCountdown();
+    const currentDate = getTashkentDateKey();
+    if (currentDate !== prayerDate) {
+      prayerDate = currentDate;
+      renderPrayerTimes(appState.selectedCity);
+    }
   }, 1000);
 }
 

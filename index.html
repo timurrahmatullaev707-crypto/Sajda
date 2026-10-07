@@ -16,7 +16,7 @@
                 <span class="logo-icon">☪</span>
                 <span>Sajda</span>
             </a>
-            <nav class="nav-links">
+            <nav class="nav-links" id="primary-navigation">
                 <a href="#">Bosh sahifa</a>
                 <a href="#mosques">Masjidlar</a>
                 <a href="#prayer">Namoz vaqtlari</a>
@@ -30,14 +30,17 @@
                 <button class="language">UZ ▾</button>
                 <button class="login-btn">Kirish</button>
             </div>
+            <button class="nav-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Navigatsiya menyusini ochish" aria-controls="primary-navigation" aria-expanded="false">
+                <span aria-hidden="true">☰</span>
+            </button>
         </div>
     </header>
 
-    <div class="onboarding-modal" id="onboarding-modal" aria-modal="true" role="dialog">
+    <div class="onboarding-modal" id="onboarding-modal" aria-modal="true" aria-labelledby="onboarding-title" role="dialog">
         <div class="onboarding-card">
             <div class="onboarding-header">
                 <span class="section-label">SAJDA</span>
-                <h2>Assalomu alaykum</h2>
+                <h2 id="onboarding-title">Assalomu alaykum</h2>
             </div>
             <p>Qaysi shaharda yashaysiz? Shaharni tanlang yoki joylashuvingizni aniqlash uchun ruxsat bering.</p>
 
@@ -66,6 +69,7 @@
                 <button class="secondary-btn onboarding-location-btn" id="onboarding-location-btn" type="button">📍 Joylashuvni aniqlash</button>
                 <button class="primary-btn onboarding-continue-btn" id="onboarding-continue-btn" type="button">Davom etish</button>
             </div>
+            <p class="onboarding-status" id="onboarding-status" aria-live="polite"></p>
         </div>
     </div>
 
@@ -171,9 +175,12 @@
                         <span class="section-label">YAQIN ATROF</span>
                         <h2>Yaqin masjidlar</h2>
                     </div>
-                    <a href="#" class="view-all">Barchasini ko‘rish →</a>
+                    <button type="button" class="view-all" id="mosque-view-all" hidden>Barchasini ko‘rish →</button>
                 </div>
+                <div class="mosque-status" id="mosque-status" aria-live="polite"></div>
+                <button type="button" class="mosque-retry-btn" id="mosque-retry-btn" hidden>Qayta urinish</button>
                 <div class="mosque-grid" id="mosque-grid"></div>
+                <p class="map-attribution">Masjid xarita ma’lumotlari: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap ishtirokchilari</a></p>
             </div>
         </section>
 
@@ -226,7 +233,8 @@
                 </div>
 
                 <div class="prayer-summary">
-                    <div class="status-pill info" id="prayer-api-status">Vaqtlar hisoblanmoqda...</div>
+                    <div class="status-pill info" id="prayer-api-status" aria-live="polite">Vaqtlar hisoblanmoqda...</div>
+                    <button type="button" class="prayer-retry-btn" id="prayer-retry-btn" hidden>Qayta yuklash</button>
                 </div>
             </div>
         </section>
@@ -405,7 +413,7 @@
                         <span class="section-label">PROFILE</span>
                         <h2>Foydalanuvchi profili</h2>
                         <p>Sizning ibodat ko'rsatkichlaringiz va xohishlaringiz bu yerda saqlanadi.</p>
-                        <button class="qibla-btn profile-action" type="button">Profilni yangilash</button>
+                        <button class="qibla-btn profile-action" id="profile-edit-btn" type="button">Profilni yangilash</button>
                     </div>
                     <div class="profile-metrics">
                         <div class="profile-stat">

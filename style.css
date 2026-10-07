@@ -46,6 +46,7 @@ section { position: relative; }
   width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; background: var(--green-900); color: var(--gold); font-size: 1.05rem; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
 }
 .nav-links { display: flex; align-items: center; gap: 30px; }
+.nav-menu-toggle { display: none; align-items: center; justify-content: center; width: 42px; height: 42px; border: 1px solid rgba(14,42,32,0.12); border-radius: 12px; background: var(--white); color: var(--green-900); font-size: 1.15rem; }
 .nav-links a {
   position: relative; color: var(--muted); font-size: 0.81rem; font-weight: 600; transition: color 0.2s ease;
 }
@@ -63,7 +64,7 @@ section { position: relative; }
 }
 .onboarding-modal.hidden { display: none; }
 .onboarding-card {
-  width: min(100%, 500px); background: rgba(255,255,255,0.98); border: 1px solid var(--line); border-radius: 28px; padding: 28px; box-shadow: 0 28px 80px rgba(7, 29, 22, 0.2);
+  width: min(100%, 500px); max-height: calc(100vh - 32px); overflow-y: auto; background: rgba(255,255,255,0.98); border: 1px solid var(--line); border-radius: 28px; padding: 28px; box-shadow: 0 28px 80px rgba(7, 29, 22, 0.2);
 }
 .onboarding-header h2 { margin-top: 10px; color: var(--green-900); font-family: "Playfair Display", serif; font-size: 2.2rem; }
 .onboarding-card p { margin-top: 10px; color: var(--muted); line-height: 1.7; }
@@ -78,6 +79,7 @@ section { position: relative; }
 }
 .onboarding-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
 .onboarding-location-btn, .onboarding-continue-btn { min-height: 48px; }
+.onboarding-status { min-height: 1.5em; font-size: 0.85rem; }
 .language { border: none; background: transparent; color: var(--muted); padding: 9px 8px; }
 .login-btn { padding: 10px 18px; transition: transform 0.2s ease, border-color 0.2s ease; }
 .login-btn:hover, .primary-btn:hover, .secondary-btn:hover, .qibla-btn:hover, .zikr-btn:hover, .target-btn:hover, .favorite-btn:hover, .filter-btn:hover { transform: translateY(-1px); }
@@ -167,6 +169,17 @@ section { position: relative; }
 .mosque-card { background: rgba(255,255,255,0.8); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .mosque-card:hover { transform: translateY(-4px); box-shadow: 0 18px 35px rgba(16, 42, 33, 0.08); }
 .mosque-image { position: relative; height: 210px; background-size: cover; background-position: center; }
+.mosque-image.has-fallback { display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 50% 110%, rgba(199,165,106,0.48), transparent 44%), linear-gradient(135deg, #0d2b22, #286d59); }
+.mosque-image.has-fallback::before { content: "☪"; display: grid; place-items: center; width: 92px; height: 92px; border: 1px solid rgba(243,230,194,0.55); border-radius: 50%; color: var(--gold-soft); font-size: 3rem; box-shadow: 0 0 0 12px rgba(255,255,255,0.04), 0 0 0 24px rgba(255,255,255,0.03); }
+.mosque-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mosque-image .distance { z-index: 1; }
+.mosque-status { margin: -10px 0 16px; color: var(--muted); font-size: 0.85rem; }
+.map-attribution { margin-top: 12px; color: var(--muted); font-size: 0.72rem; text-align: right; }
+.map-attribution a { color: var(--green-700); text-decoration: underline; text-underline-offset: 2px; }
+.mosque-retry-btn { margin: 0 0 18px; border: 1px solid rgba(14,42,32,0.14); border-radius: 999px; padding: 9px 15px; background: var(--green-soft); color: var(--green-900); font-weight: 700; }
+.mosque-retry-btn[hidden], .view-all[hidden] { display: none; }
+.view-all { border: 0; background: transparent; cursor: pointer; }
+.city-search-message { padding: 10px 12px; color: var(--muted); font-size: 0.8rem; }
 .mosque-image-1 { background: linear-gradient(135deg, #335a4e, #8ca07d); }
 .mosque-image-2 { background: linear-gradient(135deg, #4a6960, #b5a57e); }
 .mosque-image-3 { background: linear-gradient(135deg, #285044, #7b9082); }
@@ -197,6 +210,8 @@ section { position: relative; }
 .prayer-card.active span, .prayer-card.active strong, .prayer-card.active small { color: var(--white); }
 .prayer-card small { display: block; margin-top: 8px; color: var(--gold); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; }
 .prayer-summary { margin-top: 20px; }
+.prayer-retry-btn { margin: 8px 0 0; border: 1px solid rgba(14,42,32,0.14); border-radius: 999px; padding: 8px 13px; background: var(--white); color: var(--green-900); font-weight: 700; }
+.prayer-retry-btn[hidden] { display: none; }
 .qibla-card { display: flex; align-items: center; justify-content: space-between; gap: 40px; background: rgba(255,255,255,0.85); border: 1px solid var(--line); border-radius: 28px; padding: 56px 48px; box-shadow: var(--shadow-soft); }
 .qibla-info { max-width: 500px; }
 .qibla-info h2 { margin-top: 12px; font-family: "Playfair Display", serif; font-size: clamp(2.5rem, 3vw, 3.4rem); line-height: 1.05; letter-spacing: -0.04em; color: var(--green-900); }
@@ -326,14 +341,26 @@ footer { background: #081b16; color: var(--white); padding-top: 44px; }
 }
 @media (max-width: 640px) {
   .container { width: min(100% - 28px, 1180px); }
-  .nav-links { display: none; }
-  .nav-inner { height: 70px; }
+  .nav-inner { position: relative; height: 70px; gap: 8px; }
+  .nav-menu-toggle { display: inline-flex; flex: 0 0 42px; }
+  .nav-links { display: none; position: absolute; top: calc(100% + 1px); left: -14px; right: -14px; z-index: 32; padding: 12px 20px 18px; flex-direction: column; align-items: stretch; gap: 0; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.98); box-shadow: 0 18px 30px rgba(14,42,32,0.1); }
+  .nav-links.is-open { display: flex; }
+  .nav-links a { padding: 12px 4px; }
+  .nav-links a::after { display: none; }
+  .nav-actions { gap: 5px; }
+  .login-btn { padding: 8px 10px; }
   .hero h1 { font-size: 3.2rem; }
   .hero-buttons { flex-direction: column; align-items: stretch; }
   .primary-btn, .secondary-btn { width: 100%; }
   .mosque-grid, .quran-grid, .dua-grid, .daily-grid, .ramadan-insights { grid-template-columns: 1fr; }
   .prayer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .section-heading { align-items: flex-start; flex-direction: column; }
+  .city-controls, .city-search-wrap, .city-select { width: 100%; }
+  .city-select select { flex: 1; min-width: 0; }
+  .mosque-bottom { align-items: flex-start; }
+  .onboarding-modal { padding: 16px; }
+  .onboarding-card { padding: 24px 20px; border-radius: 22px; }
+  .onboarding-actions { flex-direction: column; }
   .ramadan-card { padding: 30px 24px 34px; }
   .ramadan-moon { right: -8px; font-size: 4.2rem; opacity: 0.6; }
   .qibla-card { padding: 30px 22px; }
